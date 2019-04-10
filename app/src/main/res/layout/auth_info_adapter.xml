@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="2dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/auth_info_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="#FF5722"
+                android:gravity="end"
+                android:padding="15dp"
+                android:text="等待审核"
+                android:textAlignment="viewEnd"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/auth_info_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_title"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="用户:" />
+
+            <TextView
+                android:id="@+id/auth_info_user_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="wcedla"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/auth_info_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_title"/>
+
+
+            <TextView
+                android:id="@+id/auth_info_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_user"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="姓名:" />
+
+            <TextView
+                android:id="@+id/auth_info_name_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="温龙安"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/auth_info_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_user"/>
+
+            <TextView
+                android:id="@+id/auth_info_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_name"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="工号:" />
+
+            <TextView
+                android:id="@+id/auth_info_no_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="20154013023"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/auth_info_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_name"/>
+
+            <TextView
+                android:id="@+id/auth_info_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_no"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="类型:" />
+
+            <TextView
+                android:id="@+id/auth_info_type_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="教练"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/auth_info_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_no"/>
+
+            <android.support.constraint.Barrier
+                android:id="@+id/auth_info_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="right"
+                app:constraint_referenced_ids="auth_info_user,auth_info_name,auth_info_no,auth_info_type"/>
+
+            <View
+                android:id="@+id/auth_info_split_line"
+                android:layout_width="0dp"
+                android:layout_height="1sp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_type"
+                android:background="#b9b9b9" />
+
+            <Button
+                android:id="@+id/auth_info_ok"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/auth_info_failed"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_split_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="#00000000"
+                android:text="取消审核"
+                android:textColor="#f00" />
+
+            <Button
+                android:id="@+id/auth_info_failed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/auth_info_ok"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/auth_info_split_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="#00000000"
+                android:text="通过审核"
+                android:textColor="#f00" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

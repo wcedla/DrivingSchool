@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/authentication_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activity.AuthenticationActivity">
+
+    <TextView
+        android:id="@+id/authentication_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="请补充您的基本信息"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/authentication_type_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="类型:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authentication_head" />
+
+
+    <RadioGroup
+        android:id="@+id/authentication_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/authentication_type_head"
+        app:layout_constraintStart_toEndOf="@id/authentication_barrier"
+        app:layout_constraintTop_toTopOf="@id/authentication_type_head">
+
+        <RadioButton
+            android:id="@+id/radio_coach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="30dp"
+            android:checked="true"
+            android:text="教练" />
+
+        <RadioButton
+            android:id="@+id/radio_student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学员" />
+
+    </RadioGroup>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5sp"
+        android:layout_marginTop="10dp"
+        android:background="#b9b9b9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authentication_type_head" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/authentication_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="authentication_type_head,authentication_name_head,authentication_no_head,authentication_yzm_head" />
+
+    <TextView
+        android:id="@+id/authentication_name_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="姓名:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/authentication_name_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authentication_type_head" />
+
+    <EditText
+        android:id="@+id/authentication_name_text"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:background="#00000000"
+        android:hint="填写您的真实姓名"
+        android:inputType="text"
+        android:maxLength="12"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColorHighlight="?attr/colorPrimary"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/authentication_barrier"
+        app:layout_constraintTop_toBottomOf="@id/authentication_type_head" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5sp"
+        android:background="#b9b9b9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authentication_name_text" />
+
+    <TextView
+        android:id="@+id/authentication_no_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="工号"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/authentication_no_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authentication_name_text" />
+
+    <EditText
+        android:id="@+id/authentication_no_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="15dp"
+        android:background="#00000000"
+        android:hint="填写您的工号"
+        android:inputType="text"
+        android:maxLength="12"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColorHighlight="?attr/colorPrimary"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/authentication_barrier"
+        app:layout_constraintTop_toBottomOf="@id/authentication_name_text" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5sp"
+        android:background="#b9b9b9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authentication_no_text" />
+
+
+
+    <TextView
+        android:id="@+id/authentication_yzm_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="验证码:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/authentication_yzm_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authentication_no_text" />
+
+
+    <EditText
+        android:id="@+id/authentication_yzm_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="15dp"
+        android:background="#00000000"
+        android:hint="输入右边的验证码"
+        android:inputType="text"
+        android:maxLength="4"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColorHighlight="?attr/colorPrimary"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintEnd_toStartOf="@id/authentication_yzm_img"
+        app:layout_constraintStart_toEndOf="@id/authentication_barrier"
+        app:layout_constraintTop_toBottomOf="@id/authentication_no_text" />
+
+    <ImageView
+        android:id="@+id/authentication_yzm_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/authentication_yzm_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/authentication_yzm_text"
+        app:layout_constraintTop_toBottomOf="@id/authentication_no_text" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5sp"
+        android:background="#b9b9b9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authentication_yzm_text" />
+
+    <Button
+        android:id="@+id/authentication_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/button_rect_shape"
+        android:text="立即认证"
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authentication_yzm_text" />
+
+
+</android.support.constraint.ConstraintLayout>
