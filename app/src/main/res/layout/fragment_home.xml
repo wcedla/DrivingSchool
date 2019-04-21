@@ -1,16 +1,674 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <com.youth.banner.Banner
-        android:id="@+id/home_banner"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="0dp"
-        android:layout_height="150dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.youth.banner.Banner
+                android:id="@+id/home_banner"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/item_select_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_banner">
+
+
+                <ImageView
+                    android:id="@+id/item_company"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/drawable_circle_background"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:src="@drawable/company"
+                    app:layout_constraintEnd_toEndOf="@id/item_company_text"
+                    app:layout_constraintStart_toStartOf="@id/item_company_text"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_company_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item_company"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="公司简介"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_company" />
+
+                <ImageView
+                    android:id="@+id/item_skill"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/drawable_circle_background"
+                    android:padding="15dp"
+                    android:src="@drawable/skill"
+                    app:layout_constraintEnd_toEndOf="@id/item_skill_text"
+                    app:layout_constraintStart_toStartOf="@id/item_skill_text"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_skill_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item_company"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="学车技巧"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@id/item_company"
+                    app:layout_constraintTop_toBottomOf="@id/item_skill" />
+
+
+                <ImageView
+                    android:id="@+id/item_law"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/drawable_circle_background"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:src="@drawable/law"
+                    app:layout_constraintEnd_toEndOf="@id/item_law_text"
+                    app:layout_constraintStart_toStartOf="@id/item_law_text"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_law_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item_company"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="驾考新规"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@id/item_skill_text"
+                    app:layout_constraintTop_toBottomOf="@id/item_law" />
+
+                <ImageView
+                    android:id="@+id/item_message"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/drawable_circle_background"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:src="@drawable/message"
+                    app:layout_constraintEnd_toEndOf="@id/item_message_text"
+                    app:layout_constraintStart_toStartOf="@id/item_message_text"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_message_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item_company"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="留言板"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@id/item_law_text"
+                    app:layout_constraintTop_toBottomOf="@id/item_law" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <View
+                android:id="@+id/select_split"
+                android:layout_width="0dp"
+                android:layout_height="1sp"
+                android:layout_marginTop="10dp"
+                android:background="#e1e1e1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_select_out" />
+
+            <TextView
+                android:id="@+id/coach_recommend_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="优秀教练推荐"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/item_select_out"
+                app:layout_constraintTop_toBottomOf="@id/select_split" />
+
+            <View
+                android:id="@+id/title_split"
+                android:layout_width="0dp"
+                android:layout_height="1sp"
+                android:layout_marginTop="10dp"
+                android:background="#e1e1e1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/coach_recommend_text" />
+
+            <LinearLayout
+                android:id="@+id/coach_root"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_split">
+
+                <!--<include layout="@layout/coach_recommended_item" />-->
+
+
+            </LinearLayout>
+
+
+            <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/coach_show_out_first"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="@id/item_select_out"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/title_split">-->
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/head_img"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:src="@drawable/bsj"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/coach_name_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="姓名:李小明教练"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/head_img"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/drive_year"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="驾龄:6年"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/coach_name_text" />-->
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/recommend_star"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="推荐指数:4星"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/drive_year" />-->
+
+            <!--</android.support.constraint.ConstraintLayout>-->
+
+
+            <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="1sp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="#e1e1e1"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/coach_show_out_first" />-->
+
+            <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/coach_show_out_second"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="@id/item_select_out"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/coach_show_out_first">-->
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/second_head_img"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:src="@drawable/bsj"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/second_coach_name_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="姓名:王晓智教练"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/second_head_img"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/second_drive_year"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="驾龄:7年"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/second_head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/second_coach_name_text" />-->
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/second_recommend_star"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="推荐指数:3.5星"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/second_head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/second_drive_year" />-->
+
+            <!--</android.support.constraint.ConstraintLayout>-->
+
+            <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="1sp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="#e1e1e1"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/coach_show_out_second" />-->
+
+            <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/coach_show_out_thrid"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="@id/item_select_out"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/coach_show_out_second">-->
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/thrid_head_img"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:src="@drawable/bsj"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/thrid_coach_name_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="姓名:赵明泉教练"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/thrid_head_img"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/thrid_drive_year"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="驾龄:9年"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/thrid_head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/thrid_coach_name_text" />-->
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/thrid_recommend_star"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="推荐指数:5星"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/thrid_head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/thrid_drive_year" />-->
+
+            <!--</android.support.constraint.ConstraintLayout>-->
+
+            <!--<View-->
+            <!--android:id="@+id/show_type_split"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="1sp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="#e1e1e1"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/coach_root" />-->
+
+            <TextView
+                android:id="@+id/student_recommend_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="优秀学员展示"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/item_select_out"
+                app:layout_constraintTop_toBottomOf="@id/coach_root" />
+
+            <View
+                android:id="@+id/student_title_split"
+                android:layout_width="0dp"
+                android:layout_height="1sp"
+                android:layout_marginTop="10dp"
+                android:background="#e1e1e1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_recommend_text" />
+
+            <LinearLayout
+                android:id="@+id/student_root"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_title_split">
+
+                <!--<include layout="@layout/student_recommended_item" />-->
+
+            </LinearLayout>
+
+            <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/student_show_out_first"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="@id/item_select_out"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_title_split">-->
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/student_head_img"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:src="@drawable/bsj"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/student_name_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="姓名:孙红梅"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/student_head_img"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/student_drive_year"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="学车时长:225小时"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/student_head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_name_text" />-->
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/student_recommend_star"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="教练评价:4星"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/student_head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_drive_year" />-->
+
+            <!--</android.support.constraint.ConstraintLayout>-->
+
+
+            <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="1sp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="#e1e1e1"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_show_out_first" />-->
+
+            <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/student_show_out_second"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="@id/item_select_out"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_show_out_first">-->
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/student_second_head_img"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:src="@drawable/bsj"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/student_second_coach_name_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="姓名:周传晓"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/student_second_head_img"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/student_second_drive_year"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="学车时长:185小时"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/student_second_head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_second_coach_name_text" />-->
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/student_second_recommend_star"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="教练评价:4.5星"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/student_second_head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_second_drive_year" />-->
+
+            <!--</android.support.constraint.ConstraintLayout>-->
+
+            <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="1sp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="#e1e1e1"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_show_out_second" />-->
+
+            <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/student_coach_show_out_thrid"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="@id/item_select_out"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_show_out_second">-->
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/student_thrid_head_img"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:src="@drawable/bsj"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/student_thrid_coach_name_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="姓名:陈俊生"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/student_thrid_head_img"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/student_thrid_drive_year"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="学车时长:195小时"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/student_thrid_head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_thrid_coach_name_text" />-->
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/student_thrid_recommend_star"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="教练评价:5星"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textColor="#000"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintStart_toEndOf="@id/student_thrid_head_img"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_thrid_drive_year" />-->
+
+            <!--</android.support.constraint.ConstraintLayout>-->
+
+            <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="1sp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="#e1e1e1"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/student_coach_show_out_thrid" />-->
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 
 </android.support.constraint.ConstraintLayout>

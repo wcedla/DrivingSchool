@@ -17,7 +17,7 @@ public class BannerImageLoader extends ImageLoader {
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .centerCrop();
             //Log.d("aaaa", "大小 "+context.getResources().getDisplayMetrics().widthPixels+","+(int)context.getResources().getDisplayMetrics().density*150);
-            Glide.with(context).load((int)path).apply(options).into(imageView);
+            Glide.with(context).load((String)path).apply(options).into(imageView);
         }
 
 }

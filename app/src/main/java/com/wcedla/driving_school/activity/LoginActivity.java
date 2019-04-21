@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         String loginUser = Hawk.get("loginUser", "");
-        if (loginUser.length() > 3) {
+        if (loginUser.length() > 2) {
             if(loginUser.equals("admin"))
             {
                 Logger.d("获取到之前登陆的是管理员账号，跳转到管理员" + loginUser);

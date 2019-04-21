@@ -1,8 +1,19 @@
 package com.wcedla.driving_school.tool;
 
+import android.content.Context;
+import android.util.Log;
+
+import java.io.File;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Cache;
 import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 /**
  * HTTP请求工具类
@@ -16,6 +27,29 @@ public class HttpUtils {
                 .url(url)
                 .build();
         client.newCall(request).enqueue(callback);//enqueue方法内部已经实现了创建子线程处理网络连接服务，并把数据返回给回调函数。
+    }
+
+    public static void uploadFile(String url,List<File> fileList, MediaType mediaType, Callback callback)
+    {
+        OkHttpClient okHttpClient=new OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .build();
+        MultipartBody.Builder mBodybuilder=new MultipartBody.Builder().setType(MultipartBody.FORM);
+        for(File file:fileList){
+            if(file.exists()){
+//                Log.i("imageName:",file.getName());//经过测试，此处的名称不能相同，如果相同，只能保存最后一个图片，不知道那些同名的大神是怎么成功保存图片的。
+                mBodybuilder.addFormDataPart("upload",file.getName(), RequestBody.create(mediaType,file));
+            }
+        }
+
+        RequestBody requestBody =mBodybuilder.build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+        okHttpClient.newCall(request).enqueue(callback);
     }
 
     public static String setParameterForUrl(String url,String... parameter)

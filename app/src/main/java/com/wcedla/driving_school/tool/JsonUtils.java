@@ -111,7 +111,15 @@ public class JsonUtils {
 
     public static AuthCheckBean getAuthCheckStatus(String responseString)
     {
-        return new Gson().fromJson(responseString,AuthCheckBean.class);
+        try {
+            return new Gson().fromJson(responseString,AuthCheckBean.class);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return new AuthCheckBean();
+        }
+
     }
 
     public static String getMQTTStatus(String message)
@@ -124,6 +132,25 @@ public class JsonUtils {
             return "";
         }
 
+    }
+
+    public static int getMessageSendStatus(String responseString)
+    {
+        String result = "";
+        try {
+            JSONObject jsonObject = new JSONObject(responseString);
+            result = jsonObject.getString("status");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if("ok".equals(result))
+        {
+            return -1;
+        }
+        else
+        {
+            return 1;
+        }
     }
 
 }

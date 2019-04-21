@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/scroll_info_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="[科目一]"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/scroll_info_title_text"
+        app:layout_constraintBottom_toBottomOf="@id/scroll_info_title_text"
+        android:textAlignment="center"
+        android:textColor="#F44336"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/scroll_info_title_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:textAlignment="viewStart"
+        android:padding="10dp"
+        app:layout_constraintStart_toEndOf="@id/scroll_info_type_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="科目一记不住？试试题型分类记忆！"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1sp"
+        app:layout_constraintTop_toBottomOf="@id/scroll_info_title_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#e1e1e1"/>
+
+</android.support.constraint.ConstraintLayout>

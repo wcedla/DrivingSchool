@@ -18,7 +18,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainShowActivity"></activity>
+        <activity android:name=".activity.MessageActivity"></activity>
+        <activity android:name=".activity.ShowScrollInfoActivity" />
+        <activity android:name=".activity.ShowInfoActivity" />
+        <activity
+            android:name=".activity.SplashActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.MainShowActivity" />
         <activity android:name=".activity.ShowAuthInfoActivity" />
         <activity android:name=".activity.AdminMainActivity" />
         <activity android:name=".activity.AuthenticationStatusActivity" />
@@ -32,13 +45,7 @@
         <activity
             android:name=".activity.LoginActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".service.MQTTService"
