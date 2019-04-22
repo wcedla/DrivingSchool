@@ -21,12 +21,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <!--<TextView-->
+        <!--android:id="@+id/register_type_head"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="15dp"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:text="类型:"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="18sp"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/register_head_text" />-->
+
+
+    <!--<RadioGroup-->
+        <!--android:id="@+id/register_radio_group"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintBottom_toBottomOf="@id/register_type_head"-->
+        <!--app:layout_constraintStart_toEndOf="@id/head_text_barrier"-->
+        <!--app:layout_constraintTop_toTopOf="@id/register_type_head">-->
+
+        <!--<RadioButton-->
+            <!--android:id="@+id/radio_coach"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:checked="true"-->
+            <!--android:text="教练" />-->
+
+        <!--<RadioButton-->
+            <!--android:id="@+id/radio_student"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="学员" />-->
+
+    <!--</RadioGroup>-->
+
+    <!--<View-->
+        <!--android:id="@+id/register_type_split"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0.5sp"-->
+        <!--android:background="#b9b9b9"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/register_type_head" />-->
+
+
     <TextView
         android:id="@+id/register_account_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
         android:text="账号:"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -40,7 +89,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:background="#00000000"
         android:hint="大于3位小于12位"
@@ -240,7 +288,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="right"
-        app:constraint_referenced_ids="register_account_head,register_password_head,register_email_head,register_yzm_head" />
+        app:constraint_referenced_ids="register_type_head,register_account_head,register_password_head,register_email_head,register_yzm_head" />
 
     <Button
         android:id="@+id/register_btn"

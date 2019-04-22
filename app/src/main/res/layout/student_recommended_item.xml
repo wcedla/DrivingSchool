@@ -8,7 +8,6 @@
         android:id="@+id/student_head_img"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/bsj"
         android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +53,9 @@
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/student_head_img"
-        app:layout_constraintTop_toBottomOf="@id/student_drive_year"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/student_drive_year" />
 
     <View
         android:id="@+id/student_split"

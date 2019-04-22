@@ -13,20 +13,27 @@ public class JsonUtils {
 
     public static int getLoginResult(String responseString) {
         String result = "";
+        String auth = "";
         try {
             JSONObject jsonObject = new JSONObject(responseString);
             result = jsonObject.getString("status");
+            auth = jsonObject.getString("auth");
         } catch (JSONException e) {
             e.printStackTrace();
+            return 1;
         }
-
         if ("match".equals(result)) {
-            return -1;
-        } else if ("mismatch".equals(result)) {
-            return 0;
+            if (auth.length() > 0) {
+                if ("审核通过".equals(auth)) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
         } else {
             return 1;
         }
+        return 1;
     }
 
     public static int getRegisterResult(String responseString) {
@@ -40,6 +47,23 @@ public class JsonUtils {
         if ("ok".equals(result)) {
             return -1;
         } else if ("Account Exist".equals(result)) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public static int getNickNameStatus(String responseString) {
+        String result = "";
+        try {
+            JSONObject jsonObject = new JSONObject(responseString);
+            result = jsonObject.getString("status");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if ("none".equals(result)) {
+            return -1;
+        } else if ("exist".equals(result)) {
             return 0;
         } else {
             return 1;
@@ -71,8 +95,7 @@ public class JsonUtils {
         }
     }
 
-    public static int getResetStatus(String responseString)
-    {
+    public static int getResetStatus(String responseString) {
         String result = "";
         try {
             JSONObject jsonObject = new JSONObject(responseString);
@@ -80,18 +103,14 @@ public class JsonUtils {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if("ok".equals(result))
-        {
+        if ("ok".equals(result)) {
             return -1;
-        }
-        else
-        {
+        } else {
             return 1;
         }
     }
 
-    public static int getAuthenticationStatus(String responseString)
-    {
+    public static int getAuthenticationStatus(String responseString) {
         String result = "";
         try {
             JSONObject jsonObject = new JSONObject(responseString);
@@ -99,31 +118,24 @@ public class JsonUtils {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if("ok".equals(result))
-        {
+        if ("ok".equals(result)) {
             return -1;
-        }
-        else
-        {
+        } else {
             return 1;
         }
     }
 
-    public static AuthCheckBean getAuthCheckStatus(String responseString)
-    {
+    public static AuthCheckBean getAuthCheckStatus(String responseString) {
         try {
-            return new Gson().fromJson(responseString,AuthCheckBean.class);
-        }
-        catch (Exception e)
-        {
+            return new Gson().fromJson(responseString, AuthCheckBean.class);
+        } catch (Exception e) {
             e.printStackTrace();
             return new AuthCheckBean();
         }
 
     }
 
-    public static String getMQTTStatus(String message)
-    {
+    public static String getMQTTStatus(String message) {
         try {
             JSONObject jsonObject = new JSONObject(message);
             return jsonObject.getString("status");
@@ -134,8 +146,7 @@ public class JsonUtils {
 
     }
 
-    public static int getMessageSendStatus(String responseString)
-    {
+    public static int getMessageSendStatus(String responseString) {
         String result = "";
         try {
             JSONObject jsonObject = new JSONObject(responseString);
@@ -143,12 +154,9 @@ public class JsonUtils {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if("ok".equals(result))
-        {
+        if ("ok".equals(result)) {
             return -1;
-        }
-        else
-        {
+        } else {
             return 1;
         }
     }

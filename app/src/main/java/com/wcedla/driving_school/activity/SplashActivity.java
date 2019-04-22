@@ -65,6 +65,7 @@ public class SplashActivity extends AppCompatActivity {
         gotStudent=false;
         time = 5;
         timer = new Timer();
+        //Hawk.put("loginUser","wcedla");
         loginUser = Hawk.get("loginUser", "");
         getBannerData();
         getSkillData();
@@ -72,6 +73,7 @@ public class SplashActivity extends AppCompatActivity {
         getMessageData();
         getCoachRecommended();
         getStudentRecommended();
+
         if (loginUser.length() > 2 && !"admin".equals(loginUser)) {
             checkAuthStatus();
 
@@ -122,20 +124,19 @@ public class SplashActivity extends AppCompatActivity {
                     Intent mainShowIntent = new Intent(SplashActivity.this, MainShowActivity.class);
                     startActivity(mainShowIntent);
                     finish();
-                } else if (authCheckBean.getStatus().equals("noData")) {
-                    Intent authIntent = new Intent(SplashActivity.this, AuthenticationActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("userName", loginUser);
-                    authIntent.putExtras(bundle);
-                    startActivity(authIntent);
-                    finish();
-                } else {
+                } else if(authCheckBean.getStatus().equals("审核未通过")||authCheckBean.getStatus().equals("审核中")){
                     Intent noPassAuthIntent = new Intent(SplashActivity.this, AuthenticationStatusActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("userName", loginUser);
                     noPassAuthIntent.putExtras(bundle);
                     startActivity(noPassAuthIntent);
                     finish();
+                }
+                else
+                {
+                    Hawk.delete("loginUser");
+                    Intent loginIntent=new Intent(this,LoginActivity.class);
+                    startActivity(loginIntent);
                 }
 
             } else if (gotAuth && gotBanner&&gotSkill&&gotLaw&&gotMessage&&gotCoach&&gotStudent) {
@@ -150,20 +151,19 @@ public class SplashActivity extends AppCompatActivity {
                                 Intent mainShowIntent = new Intent(SplashActivity.this, MainShowActivity.class);
                                 startActivity(mainShowIntent);
                                 finish();
-                            } else if (authCheckBean.getStatus().equals("noData")) {
-                                Intent authIntent = new Intent(SplashActivity.this, AuthenticationActivity.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putString("userName", loginUser);
-                                authIntent.putExtras(bundle);
-                                startActivity(authIntent);
-                                finish();
-                            } else {
+                            } else if(authCheckBean.getStatus().equals("审核未通过")||authCheckBean.getStatus().equals("审核中")){
                                 Intent noPassAuthIntent = new Intent(SplashActivity.this, AuthenticationStatusActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("userName", loginUser);
                                 noPassAuthIntent.putExtras(bundle);
                                 startActivity(noPassAuthIntent);
                                 finish();
+                            }
+                            else
+                            {
+                                Hawk.delete("loginUser");
+                                Intent loginIntent=new Intent(SplashActivity.this,LoginActivity.class);
+                                startActivity(loginIntent);
                             }
                             break;
                         }

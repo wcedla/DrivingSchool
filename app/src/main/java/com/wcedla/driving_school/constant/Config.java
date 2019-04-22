@@ -98,6 +98,8 @@ public class Config {
      */
     public final static String REGISTER_URL = "http://192.168.191.1:8080/DrivingSchoolServer/UserRegister";
 
+    public final static String CHECK_NICK_NAME_EXIST="http://192.168.191.1:8080/DrivingSchoolServer/GetNickNameExistServlet";
+
     public final static String GET_EMAIL_URL = "http://192.168.191.1:8080/DrivingSchoolServer/GetEmail";
 
     public final static String RESET_PASSWORD_URL = "http://192.168.191.1:8080/DrivingSchoolServer/ResetPassword";

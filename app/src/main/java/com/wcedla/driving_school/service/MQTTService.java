@@ -107,6 +107,7 @@ public class MQTTService extends Service {
         // MQTT本身就是为信号不稳定的网络设计的，所以难免一些客户端会无故的和Broker断开连接。
         //当客户端连接到Broker时，可以指定LWT，Broker会定期检测客户端是否有异常。
         //当客户端异常掉线时，Broker就往连接时指定的topic里推送当时指定的LWT消息。
+        Logger.d("topic:"+topic);
         conOpt.setWill(topic, "已掉线".getBytes(), 0, false);
         //连接服务器
         doClientConnection();

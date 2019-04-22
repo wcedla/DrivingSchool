@@ -96,17 +96,14 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-
         String loginUser = Hawk.get("loginUser", "");
         if (loginUser.length() > 2) {
-            if(loginUser.equals("admin"))
-            {
+            if (loginUser.equals("admin")) {
                 Logger.d("获取到之前登陆的是管理员账号，跳转到管理员" + loginUser);
-                Intent demo=new Intent(this, AdminMainActivity.class);
+                Intent demo = new Intent(this, AdminMainActivity.class);
                 startActivity(demo);
                 finish();
-            }
-            else {
+            } else {
                 Logger.d("用户登录活动读取到用户之前已经成功登陆过，准备跳转到认证检查活动" + loginUser);
                 Intent authIntent = new Intent(LoginActivity.this, AuthenticationStatusActivity.class);
                 Bundle bundle = new Bundle();
@@ -174,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
             loginProgressDialog = CustomProgressDialog.create(LoginActivity.this, "正在登陆...", false);
             loginProgressDialog.showProgressDialog();
             if ("admin".equals(inputUserName) && "adminwcedla".equals(inputPassword)) {
-                Intent adminIntent=new Intent(LoginActivity.this, AdminMainActivity.class);
+                Intent adminIntent = new Intent(LoginActivity.this, AdminMainActivity.class);
                 Hawk.put("loginUser", inputUserName);
                 startActivity(adminIntent);
                 finish();
@@ -211,7 +208,26 @@ public class LoginActivity extends AppCompatActivity {
                                         delayTask(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Logger.d("用户登录成功，准备跳转认证检查活动" + inputUserName);
+                                                Logger.d("用户登录成功，并且审核通过，准备跳转主界面活动" + inputUserName);
+                                                loginProgressDialog.cancelProgressDialog();
+                                                Intent mainIntent = new Intent(LoginActivity.this, MainShowActivity.class);
+                                                startActivity(mainIntent);
+                                                finish();
+                                            }
+                                        }, DIALOG_DELAY);
+
+                                    }
+                                });
+                                break;
+                            case 0:
+                                Hawk.put("loginUser", inputUserName);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        delayTask(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Logger.d("用户登录成功，但是审核未通过或者正在审核，准备跳转审核装填查看界面" + inputUserName);
                                                 loginProgressDialog.cancelProgressDialog();
                                                 Intent authIntent = new Intent(LoginActivity.this, AuthenticationStatusActivity.class);
                                                 Bundle bundle = new Bundle();
@@ -221,11 +237,11 @@ public class LoginActivity extends AppCompatActivity {
                                                 finish();
                                             }
                                         }, DIALOG_DELAY);
-
                                     }
                                 });
                                 break;
-                            case 0:
+
+                            case 1:
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {

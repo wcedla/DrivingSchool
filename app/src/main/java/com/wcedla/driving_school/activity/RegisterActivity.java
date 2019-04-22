@@ -4,19 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcel;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
 import com.wcedla.driving_school.R;
 import com.wcedla.driving_school.customview.CustomProgressDialog;
 import com.wcedla.driving_school.listener.EmailSendStatusInterface;
@@ -39,6 +39,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+import static com.wcedla.driving_school.constant.Config.CHECK_NICK_NAME_EXIST;
 import static com.wcedla.driving_school.constant.Config.DIALOG_DELAY;
 import static com.wcedla.driving_school.constant.Config.EMAIL_CHECK_MAX_LENGTH;
 import static com.wcedla.driving_school.constant.Config.EMAIL_CHECK_REGEX;
@@ -81,6 +82,7 @@ public class RegisterActivity extends AppCompatActivity implements EmailSendStat
     @BindView(R.id.register_btn)
     Button registerButton;
 
+
     CustomProgressDialog progressDialog = null;
 
     boolean emailCheckClick = false;
@@ -88,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity implements EmailSendStat
     Timer timer;
     TimerTask timerTask;
     String emailCode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -207,16 +210,15 @@ public class RegisterActivity extends AppCompatActivity implements EmailSendStat
             progressDialog = CustomProgressDialog.create(RegisterActivity.this, "正在注册...", false);
             progressDialog.showProgressDialog();
             String encryptedPassword = ToolUtils.MD5Encrypted(password);
-            //String registerUrl = "http://192.168.191.1:8080/DrivingSchoolServer/UserRegister?userName=" + userName + "&password=" + encryptedPassword + "&email=" + email;
-            String registerUrl = HttpUtils.setParameterForUrl(REGISTER_URL, "userName", userName, "password", encryptedPassword, "email", email);
-            HttpUtils.doHttpRequest(registerUrl, new Callback() {
+            String url=HttpUtils.setParameterForUrl(CHECK_NICK_NAME_EXIST,"nickName",userName);
+            HttpUtils.doHttpRequest(url, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             progressDialog.cancelProgressDialog();
-                            Toast.makeText(RegisterActivity.this, "注册失败！可能是服务器出现了问题！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "注册失败,请检查网络连接！", Toast.LENGTH_SHORT).show();
                             yzmText.setText("");
                             yzmImg.performClick();
                         }
@@ -225,81 +227,149 @@ public class RegisterActivity extends AppCompatActivity implements EmailSendStat
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    String responseString = response.body().string();
-                    int jsonResult = JsonUtils.getRegisterResult(responseString);
-                    switch (jsonResult) {
-                        case -1:
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    yzmImg.performClick();
-                                    yzmText.setText("");
-                                    delayTask(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            progressDialog.cancelProgressDialog();
-                                            Toast.makeText(RegisterActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
-                                            Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                            loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            startActivity(loginIntent);
-                                        }
-                                    }, DIALOG_DELAY);
-
-                                }
-                            });
-                            break;
-                        case 0:
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    delayTask(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            progressDialog.cancelProgressDialog();
-                                            Toast.makeText(RegisterActivity.this, "很抱歉，该用户名已被注册！", Toast.LENGTH_SHORT).show();
-                                            yzmText.setText("");
-                                            yzmImg.performClick();
-                                        }
-                                    }, DIALOG_DELAY);
-                                }
-                            });
-                            break;
-                        case 1:
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    delayTask(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            progressDialog.cancelProgressDialog();
-                                            Toast.makeText(RegisterActivity.this, "很抱歉，注册失败！", Toast.LENGTH_SHORT).show();
-                                            yzmText.setText("");
-                                            yzmImg.performClick();
-                                        }
-                                    }, DIALOG_DELAY);
-                                }
-                            });
-                            break;
-                        default:
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    delayTask(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            progressDialog.cancelProgressDialog();
-                                            Toast.makeText(RegisterActivity.this, "很抱歉，出现了未知错误！", Toast.LENGTH_SHORT).show();
-                                            yzmText.setText("");
-                                            yzmImg.performClick();
-                                        }
-                                    }, DIALOG_DELAY);
-                                }
-                            });
-                            break;
+                    String resonseString =response.body().string();
+                    int result=JsonUtils.getNickNameStatus(resonseString);
+                    if(result==-1)
+                    {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.cancelProgressDialog();
+                                yzmText.setText("");
+                                yzmImg.performClick();
+                            }
+                        });
+                        Intent authIntent=new Intent(RegisterActivity.this,AuthenticationActivity.class);
+                        Bundle bundle=new Bundle();
+                        bundle.putString("nickName",userName);
+                        bundle.putString("password",encryptedPassword);
+                        bundle.putString("email",email);
+                        authIntent.putExtras(bundle);
+                        startActivity(authIntent);
+                        finish();
                     }
-
+                    else if(result==0)
+                    {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.cancelProgressDialog();
+                                Toast.makeText(RegisterActivity.this, "该昵称已被注册！", Toast.LENGTH_SHORT).show();
+                                yzmText.setText("");
+                                yzmImg.performClick();
+                            }
+                        });
+                    }
+                    else
+                    {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progressDialog.cancelProgressDialog();
+                                Toast.makeText(RegisterActivity.this, "注册失败，请重试！", Toast.LENGTH_SHORT).show();
+                                yzmText.setText("");
+                                yzmImg.performClick();
+                            }
+                        });
+                    }
                 }
             });
+
+
+
+            //String registerUrl = "http://192.168.191.1:8080/DrivingSchoolServer/UserRegister?userName=" + userName + "&password=" + encryptedPassword + "&email=" + email;
+            //String registerUrl = HttpUtils.setParameterForUrl(REGISTER_URL, "userName", userName, "password", encryptedPassword, "email", email);
+//            HttpUtils.doHttpRequest(registerUrl, new Callback() {
+//                @Override
+//                public void onFailure(Call call, IOException e) {
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            progressDialog.cancelProgressDialog();
+//                            Toast.makeText(RegisterActivity.this, "注册失败！可能是服务器出现了问题！", Toast.LENGTH_SHORT).show();
+//                            yzmText.setText("");
+//                            yzmImg.performClick();
+//                        }
+//                    });
+//                }
+//
+//                @Override
+//                public void onResponse(Call call, Response response) throws IOException {
+//                    String responseString = response.body().string();
+//                    int jsonResult = JsonUtils.getRegisterResult(responseString);
+//                    switch (jsonResult) {
+//                        case -1:
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    yzmImg.performClick();
+//                                    yzmText.setText("");
+//                                    delayTask(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            progressDialog.cancelProgressDialog();
+//                                            Toast.makeText(RegisterActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
+//                                            Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+//                                            loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                            startActivity(loginIntent);
+//                                        }
+//                                    }, DIALOG_DELAY);
+//
+//                                }
+//                            });
+//                            break;
+//                        case 0:
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    delayTask(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            progressDialog.cancelProgressDialog();
+//                                            Toast.makeText(RegisterActivity.this, "很抱歉，该用户名已被注册！", Toast.LENGTH_SHORT).show();
+//                                            yzmText.setText("");
+//                                            yzmImg.performClick();
+//                                        }
+//                                    }, DIALOG_DELAY);
+//                                }
+//                            });
+//                            break;
+//                        case 1:
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    delayTask(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            progressDialog.cancelProgressDialog();
+//                                            Toast.makeText(RegisterActivity.this, "很抱歉，注册失败！", Toast.LENGTH_SHORT).show();
+//                                            yzmText.setText("");
+//                                            yzmImg.performClick();
+//                                        }
+//                                    }, DIALOG_DELAY);
+//                                }
+//                            });
+//                            break;
+//                        default:
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    delayTask(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            progressDialog.cancelProgressDialog();
+//                                            Toast.makeText(RegisterActivity.this, "很抱歉，出现了未知错误！", Toast.LENGTH_SHORT).show();
+//                                            yzmText.setText("");
+//                                            yzmImg.performClick();
+//                                        }
+//                                    }, DIALOG_DELAY);
+//                                }
+//                            });
+//                            break;
+//                    }
+//
+//                }
+//            });
         }
     }
 
@@ -442,6 +512,7 @@ public class RegisterActivity extends AppCompatActivity implements EmailSendStat
             public void run() {
                 if (progressDialog != null) {
                     progressDialog.cancelProgressDialog();
+                    Logger.d("邮箱码为:"+emailCode);
                     setEmailClick();
                 }
             }

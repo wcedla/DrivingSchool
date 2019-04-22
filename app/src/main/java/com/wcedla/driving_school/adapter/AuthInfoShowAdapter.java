@@ -45,22 +45,22 @@ public class AuthInfoShowAdapter extends RecyclerView.Adapter<AuthInfoShowAdapte
 
     @Override
     public void onBindViewHolder(@NonNull AuthInfoHolder authInfoHolder, int i) {
-        authInfoHolder.statusTitle.setText(authBeanList.get(i).getStatus());
-        authInfoHolder.userText.setText(authBeanList.get(i).getUserAuth());
-        authInfoHolder.nameText.setText(authBeanList.get(i).getName());
+        authInfoHolder.statusTitle.setText(authBeanList.get(i).getAuthStatus());
+        authInfoHolder.userText.setText(authBeanList.get(i).getNickName());
+        authInfoHolder.nameText.setText(authBeanList.get(i).getRealName());
         authInfoHolder.noText.setText(authBeanList.get(i).getNo());
         authInfoHolder.typeText.setText(authBeanList.get(i).getType());
-        if("审核中".equals(authBeanList.get(i).getStatus()))
+        if("审核中".equals(authBeanList.get(i).getAuthStatus()))
         {
             authInfoHolder.authOk.setText("通过审核");
             authInfoHolder.authFailed.setText("拒绝通过");
         }
-        else if("审核通过".equals(authBeanList.get(i).getStatus()))
+        else if("审核通过".equals(authBeanList.get(i).getAuthStatus()))
         {
             authInfoHolder.authOk.setText("取消通过");
             authInfoHolder.authFailed.setVisibility(View.GONE);
         }
-        else if("审核未通过".equals(authBeanList.get(i).getStatus()))
+        else if("审核未通过".equals(authBeanList.get(i).getAuthStatus()))
         {
             authInfoHolder.authOk.setText("通过审核");
             authInfoHolder.authFailed.setVisibility(View.GONE);
@@ -77,11 +77,11 @@ public class AuthInfoShowAdapter extends RecyclerView.Adapter<AuthInfoShowAdapte
                 ((ShowAuthInfoActivity)context).recyclerViewHideInput();
                 if (authInfoHolder.authOk.getText().toString().equals("通过审核"))
                 {
-                    setAuthStatus(authInfoHolder.userText.getText().toString(),"审核通过");
+                    setAuthStatus(authInfoHolder.userText.getText().toString(),"审核通过",authBeanList.get(i).getType(),authBeanList.get(i).getNo(),authBeanList.get(i).getRealName());
                 }
                 else
                 {
-                    setAuthStatus(authInfoHolder.userText.getText().toString(),"审核未通过");
+                    setAuthStatus(authInfoHolder.userText.getText().toString(),"审核未通过",authBeanList.get(i).getType(),"null","null");
                 }
             }
         });
@@ -89,7 +89,7 @@ public class AuthInfoShowAdapter extends RecyclerView.Adapter<AuthInfoShowAdapte
             @Override
             public void onClick(View v) {
                 ((ShowAuthInfoActivity)context).recyclerViewHideInput();
-                setAuthStatus(authInfoHolder.userText.getText().toString(),"审核未通过");
+                setAuthStatus(authInfoHolder.userText.getText().toString(),"审核未通过","null","null","null");
             }
         });
     }
@@ -123,9 +123,9 @@ public class AuthInfoShowAdapter extends RecyclerView.Adapter<AuthInfoShowAdapte
         }
     }
 
-    private void setAuthStatus(String user,String status)
+    private void setAuthStatus(String user,String status,String type,String no,String realName)
     {
-        String url= HttpUtils.setParameterForUrl(AUTHENTICATION_SET_STATUS_URL,"userName",user,"status",status);
+        String url= HttpUtils.setParameterForUrl(AUTHENTICATION_SET_STATUS_URL,"userName",user,"status",status,"type",type,"no",no,"realName",realName);
         HttpUtils.doHttpRequest(url, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

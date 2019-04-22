@@ -4,7 +4,6 @@ import java.util.List;
 
 public class AuthInfoBean {
 
-
     private List<AuthBean> auth;
 
     public List<AuthBean> getAuth() {
@@ -18,19 +17,23 @@ public class AuthInfoBean {
     public static class AuthBean {
         /**
          * no : 20154013023
-         * userAuth : wcedla
-         * name : 温龙安
-         * id : 11
+         * realName : 温龙安
+         * password : b57ee49cacc7ba5537710fba427c32e6
+         * nickName : wcedla
+         * authStatus : 审核中
+         * id : 4
          * type : 教练
-         * status : 审核中
+         * email : wcedla@live.com
          */
 
         private String no;
-        private String userAuth;
-        private String name;
+        private String realName;
+        private String password;
+        private String nickName;
+        private String authStatus;
         private String id;
         private String type;
-        private String status;
+        private String email;
 
         public String getNo() {
             return no;
@@ -40,20 +43,36 @@ public class AuthInfoBean {
             this.no = no;
         }
 
-        public String getUserAuth() {
-            return userAuth;
+        public String getRealName() {
+            return realName;
         }
 
-        public void setUserAuth(String userAuth) {
-            this.userAuth = userAuth;
+        public void setRealName(String realName) {
+            this.realName = realName;
         }
 
-        public String getName() {
-            return name;
+        public String getPassword() {
+            return password;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getNickName() {
+            return nickName;
+        }
+
+        public void setNickName(String nickName) {
+            this.nickName = nickName;
+        }
+
+        public String getAuthStatus() {
+            return authStatus;
+        }
+
+        public void setAuthStatus(String authStatus) {
+            this.authStatus = authStatus;
         }
 
         public String getId() {
@@ -72,12 +91,12 @@ public class AuthInfoBean {
             this.type = type;
         }
 
-        public String getStatus() {
-            return status;
+        public String getEmail() {
+            return email;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public void setEmail(String email) {
+            this.email = email;
         }
     }
 }

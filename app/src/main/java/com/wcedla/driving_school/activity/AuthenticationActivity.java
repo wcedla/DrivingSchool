@@ -19,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orhanobut.hawk.Hawk;
 import com.orhanobut.logger.Logger;
 import com.wcedla.driving_school.R;
 import com.wcedla.driving_school.customview.CustomProgressDialog;
@@ -70,6 +71,8 @@ public class AuthenticationActivity extends AppCompatActivity {
     TextView authenticationNoHead;
 
     String userName;
+    String password;
+    String email;
 
     CustomProgressDialog customProgressDialog;
 
@@ -80,12 +83,16 @@ public class AuthenticationActivity extends AppCompatActivity {
         ToolUtils.setNavigationBarStatusBarTranslucent(this, true, false);
         setContentView(R.layout.activity_authentication);
         ButterKnife.bind(this);
-        Bundle bundle=getIntent().getExtras();
-        if(bundle!=null)
-        {
-
-            userName=bundle.getString("userName");
-            Logger.d("用户认证提交活动获取用户名"+userName);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            userName = bundle.getString("nickName", "null");
+            password = bundle.getString("password", "null");
+            email = bundle.getString("email", "null");
+            Logger.d("用户认证提交活动获取用户名" + userName);
+        } else {
+            userName = "";
+            password = "";
+            email = "";
         }
         authenticationYzmImg.setImageBitmap(CodeUtils.getInstance().createBitmap());
         radioCoach.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -102,8 +109,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         radioStudent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                {
+                if (isChecked) {
                     authenticationNoHead.setText("学员号:");
                     authenticationNoText.setText("");
                     authenticationNoText.setHint("填写您的学员号");
@@ -111,9 +117,9 @@ public class AuthenticationActivity extends AppCompatActivity {
             }
         });
 
-        setInputFilter(authenticationNameText,USERNAME_REGEX,5);
-        setInputFilter(authenticationNoText,EMAIL_CHECK_REGEX,11);
-        setInputFilter(authenticationYzmText,YZM_REGEX,YZM_MAX_LENGTH);
+        setInputFilter(authenticationNameText, USERNAME_REGEX, 5);
+        setInputFilter(authenticationNoText, EMAIL_CHECK_REGEX, 11);
+        setInputFilter(authenticationYzmText, YZM_REGEX, YZM_MAX_LENGTH);
     }
 
     @OnClick(R.id.authentication_name_text)
@@ -147,25 +153,20 @@ public class AuthenticationActivity extends AppCompatActivity {
     @OnClick(R.id.authentication_btn)
     public void sendClick() {
         hideInputMethod(authenticationBtn);
-        String type = "",name="",no="",yzm="";
-        if(authenticationRadioGroup.getCheckedRadioButtonId()==radioCoach.getId())
-        {
-            type="教练";
+        String type = "", name = "", no = "", yzm = "";
+        if (authenticationRadioGroup.getCheckedRadioButtonId() == radioCoach.getId()) {
+            type = "教练";
+        } else if (authenticationRadioGroup.getCheckedRadioButtonId() == radioStudent.getId()) {
+            type = "学员";
         }
-        else if(authenticationRadioGroup.getCheckedRadioButtonId()==radioStudent.getId())
-        {
-            type="学员";
-        }
-        name=authenticationNameText.getText().toString().trim();
-        no=authenticationNoText.getText().toString().trim();
-        yzm=authenticationYzmText.getText().toString().trim();
-        if(name.length()>=2&&no.length()==11&&yzm.length()==4)
-        {
-            if(yzm.toLowerCase().equals(CodeUtils.getInstance().getCode().toLowerCase()))
-            {
-                customProgressDialog=CustomProgressDialog.create(AuthenticationActivity.this,"正在发送...",false);
+        name = authenticationNameText.getText().toString().trim();
+        no = authenticationNoText.getText().toString().trim();
+        yzm = authenticationYzmText.getText().toString().trim();
+        if (name.length() >= 2 && no.length() == 11 && yzm.length() == 4) {
+            if (yzm.toLowerCase().equals(CodeUtils.getInstance().getCode().toLowerCase())) {
+                customProgressDialog = CustomProgressDialog.create(AuthenticationActivity.this, "正在发送...", false);
                 customProgressDialog.showProgressDialog();
-                String url= HttpUtils.setParameterForUrl(AUTHENTCATION_URL,"userAuth",userName,"type",type,"name",name,"no",no);
+                String url = HttpUtils.setParameterForUrl(AUTHENTCATION_URL, "nickName", userName, "type", type, "password", password, "email", email, "no", no, "realName", name);
                 HttpUtils.doHttpRequest(url, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
@@ -174,56 +175,60 @@ public class AuthenticationActivity extends AppCompatActivity {
                             public void run() {
                                 Logger.d("用户认证提交活动网络回调onfailed");
                                 customProgressDialog.cancelProgressDialog();
-                                Toast.makeText(AuthenticationActivity.this,"发送认证失败！",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AuthenticationActivity.this, "发送认证失败！", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        String responseData=response.body().string();
-                        int result=JsonUtils.getAuthenticationStatus(responseData);
-                        if(result==-1)
-                        {
+                        String responseData = response.body().string();
+                        int result = JsonUtils.getAuthenticationStatus(responseData);
+                        if (result == -1) {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Logger.d("用户认证提交活动提交成功,跳转认证检查活动"+userName);
+                                    Logger.d("用户认证提交活动提交成功,跳转认证检查活动" + userName);
                                     customProgressDialog.cancelProgressDialog();
-                                    Toast.makeText(AuthenticationActivity.this,"发送认证成功！",Toast.LENGTH_SHORT).show();
-                                    Intent checkAuthIntent=new Intent(AuthenticationActivity.this,AuthenticationStatusActivity.class);
-                                    Bundle bundle=new Bundle();
-                                    bundle.putString("userName",userName);
-                                    checkAuthIntent.putExtras(bundle);
-                                    startActivity(checkAuthIntent);
-                                    finish();
+                                    Toast.makeText(AuthenticationActivity.this, "发送认证成功！", Toast.LENGTH_SHORT).show();
+                                    String loginUser=Hawk.get("loginUser","");
+                                    if(loginUser.length()<3)
+                                    {
+                                        Intent loginIntent=new Intent(AuthenticationActivity.this,LoginActivity.class);
+                                        loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(loginIntent);
+                                        finish();
+                                    }
+                                    else {
+                                        Intent checkAuthIntent = new Intent(AuthenticationActivity.this, AuthenticationStatusActivity.class);
+                                        checkAuthIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("userName", userName);
+                                        checkAuthIntent.putExtras(bundle);
+                                        startActivity(checkAuthIntent);
+                                        finish();
+                                    }
                                 }
                             });
-                            }
-                        else
-                        {
+                        } else {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Logger.d("用户认证提交活动提交失败");
+                                    Logger.d("用户认证提交活动提交失败" + responseData);
                                     customProgressDialog.cancelProgressDialog();
-                                    Toast.makeText(AuthenticationActivity.this,"发送认证失败！",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AuthenticationActivity.this, "发送认证失败！", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                            }
+                        }
                     }
                 });
-            }
-            else
-            {
-                Toast.makeText(AuthenticationActivity.this,"验证码不正确！",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(AuthenticationActivity.this, "验证码不正确！", Toast.LENGTH_SHORT).show();
                 authenticationYzmText.setText("");
                 yzmImgClick();
             }
-        }
-        else
-        {
-            Toast.makeText(AuthenticationActivity.this,"请输入正确的内容！",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(AuthenticationActivity.this, "请输入正确的内容！", Toast.LENGTH_SHORT).show();
         }
 
     }

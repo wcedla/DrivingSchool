@@ -131,7 +131,7 @@ public class ShowAuthInfoActivity extends AppCompatActivity {
                 userBeanList=new ArrayList<>();
                 for(AuthInfoBean.AuthBean authBean:authBeanList)
                 {
-                    if (authBean.getUserAuth().equals(user))
+                    if (authBean.getRealName().equals(user))
                     {
                         userBeanList.add(authBean);
                     }
@@ -167,7 +167,7 @@ public class ShowAuthInfoActivity extends AppCompatActivity {
                         Logger.d("我再点击审核中"+authCheckDoing.isChecked());
                         doingBeanList = new ArrayList<>();
                         for (AuthInfoBean.AuthBean authBean : authBeanList) {
-                            if (authBean.getStatus().equals("审核中")) {
+                            if (authBean.getAuthStatus().equals("审核中")) {
                                 doingBeanList.add(authBean);
                             }
                         }
@@ -184,7 +184,7 @@ public class ShowAuthInfoActivity extends AppCompatActivity {
                         Logger.d("我再点击审核通过"+authCheckSuccess.isChecked());
                         successBeanList = new ArrayList<>();
                         for (AuthInfoBean.AuthBean authBean : authBeanList) {
-                            if (authBean.getStatus().equals("审核通过")) {
+                            if (authBean.getAuthStatus().equals("审核通过")) {
                                 successBeanList.add(authBean);
                             }
                         }
@@ -202,7 +202,7 @@ public class ShowAuthInfoActivity extends AppCompatActivity {
                         Logger.d("我再点击审核未通过"+authCheckFailed.isChecked());
                         failedBeanList = new ArrayList<>();
                         for (AuthInfoBean.AuthBean authBean : authBeanList) {
-                            if (authBean.getStatus().equals("审核未通过")) {
+                            if (authBean.getAuthStatus().equals("审核未通过")) {
                                 failedBeanList.add(authBean);
                             }
                         }

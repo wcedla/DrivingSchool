@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orhanobut.hawk.Hawk;
 import com.orhanobut.logger.Logger;
 import com.wcedla.driving_school.R;
 import com.wcedla.driving_school.bean.AuthCheckBean;
@@ -94,18 +95,18 @@ public class AuthenticationStatusActivity extends AppCompatActivity implements M
 
     @OnClick(R.id.auth_status_cancel)
     public void cancelClick() {
-        if (authStatusCancel.getText().toString().length() > 4) {
+//        if (authStatusCancel.getText().toString().length() > 4) {
             Logger.d("用户重新提交认证信息，跳转到认证信息提交活动");
             Intent authIntent = new Intent(AuthenticationStatusActivity.this, AuthenticationActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putString("userName", userName);
+            bundle.putString("nickName", userName);
             authIntent.putExtras(bundle);
             startActivity(authIntent);
             finish();
-        } else {
-            Logger.d("用户取消认证，跳转到认证提交页面重新提交认证信息");
-            cancelAuth();
-        }
+//        } else {
+//            Logger.d("用户取消认证，跳转到认证提交页面重新提交认证信息");
+//            cancelAuth();
+//        }
     }
 
     private void checkAuthStatus() {
@@ -167,19 +168,16 @@ public class AuthenticationStatusActivity extends AppCompatActivity implements M
                             authStatusNameText.setText(authCheckBean.getName());
                             authStatusNoText.setText(authCheckBean.getNo());
                             authStatusTypeText.setText(authCheckBean.getType());
-                            authStatusCancel.setText("取消审核");
+                            authStatusCancel.setText("重新提交审核信息");
                             authStatusLayout.setVisibility(View.VISIBLE);
                         }
                     });
 
                 } else if (authCheckBean.getStatus().equals("noData")) {
                     Logger.d("用户认证还未提交，跳转到认证提交活动" + userName);
-                    Intent authIntent = new Intent(AuthenticationStatusActivity.this, AuthenticationActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("userName", userName);
-                    authIntent.putExtras(bundle);
-                    startActivity(authIntent);
-                    finish();
+                    Hawk.delete("loginUser");
+                    Intent loginIntent=new Intent(AuthenticationStatusActivity.this,LoginActivity.class);
+                    startActivity(loginIntent);
                 } else {
                     runOnUiThread(new Runnable() {
                         @Override
@@ -195,45 +193,45 @@ public class AuthenticationStatusActivity extends AppCompatActivity implements M
         });
     }
 
-    private void cancelAuth() {
-        String url = HttpUtils.setParameterForUrl(AUTHENTICATION_CANCEL_URL, "userName", userName);
-        HttpUtils.doHttpRequest(url, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Logger.d("用户认证取消认证网络接口回调onfailed");
-                        Toast.makeText(AuthenticationStatusActivity.this, "取消失败", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String responseString = response.body().string();
-                int result = JsonUtils.getAuthenticationStatus(responseString);
-                if (result == -1) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Logger.d("用户认证取消认证成功跳转到认证提交活动" + userName);
-                            Toast.makeText(AuthenticationStatusActivity.this, "取消成功", Toast.LENGTH_SHORT).show();
-                            Intent authIntent = new Intent(AuthenticationStatusActivity.this, AuthenticationActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putString("userName", userName);
-                            authIntent.putExtras(bundle);
-                            startActivity(authIntent);
-                            finish();
-                        }
-                    });
-                } else {
-                    Logger.d("用户认证取消失败");
-                    Toast.makeText(AuthenticationStatusActivity.this, "取消失败", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
+//    private void cancelAuth() {
+//        String url = HttpUtils.setParameterForUrl(AUTHENTICATION_CANCEL_URL, "userName", userName);
+//        HttpUtils.doHttpRequest(url, new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Logger.d("用户认证取消认证网络接口回调onfailed");
+//                        Toast.makeText(AuthenticationStatusActivity.this, "取消失败", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String responseString = response.body().string();
+//                int result = JsonUtils.getAuthenticationStatus(responseString);
+//                if (result == -1) {
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Logger.d("用户认证取消认证成功跳转到认证提交活动" + userName);
+//                            Toast.makeText(AuthenticationStatusActivity.this, "取消成功", Toast.LENGTH_SHORT).show();
+//                            Intent authIntent = new Intent(AuthenticationStatusActivity.this, AuthenticationActivity.class);
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString("userName", userName);
+//                            authIntent.putExtras(bundle);
+//                            startActivity(authIntent);
+//                            finish();
+//                        }
+//                    });
+//                } else {
+//                    Logger.d("用户认证取消失败");
+//                    Toast.makeText(AuthenticationStatusActivity.this, "取消失败", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//    }
 
     /**
      * MQTT收到消息回调
