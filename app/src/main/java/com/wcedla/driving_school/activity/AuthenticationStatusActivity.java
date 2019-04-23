@@ -51,6 +51,7 @@ public class AuthenticationStatusActivity extends AppCompatActivity implements M
     ConstraintLayout authStatusLayout;
 
     String userName = "";
+    AuthCheckBean authCheckBean;
 
     MQTTService.MQTTBinder mqttBinder = null;
     MQTTServiceConnection mqttServiceConnection;
@@ -127,7 +128,7 @@ public class AuthenticationStatusActivity extends AppCompatActivity implements M
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseString = response.body().string();
-                AuthCheckBean authCheckBean = JsonUtils.getAuthCheckStatus(responseString);
+                authCheckBean = JsonUtils.getAuthCheckStatus(responseString);
                 Logger.d("认证检查获取服务器返回结果" + authCheckBean.getStatus());
                 if (authCheckBean.getStatus().equals("审核通过")) {
                     runOnUiThread(new Runnable() {
@@ -137,6 +138,8 @@ public class AuthenticationStatusActivity extends AppCompatActivity implements M
                             authStatusTitle.setText("审核通过");
                             authStatusCancel.setText("审核已经通过");
                             authStatusCancel.setEnabled(false);
+                            Hawk.put("loginType", authCheckBean.getType());
+                            Hawk.put("loginNo", authCheckBean.getNo());
                             Toast.makeText(AuthenticationStatusActivity.this, "审核通过", Toast.LENGTH_SHORT).show();
                             Intent mainShowIntent=new Intent(AuthenticationStatusActivity.this,MainShowActivity.class);
                             startActivity(mainShowIntent);
@@ -246,6 +249,8 @@ public class AuthenticationStatusActivity extends AppCompatActivity implements M
             authStatusCancel.setText("审核通过");
             authStatusCancel.setEnabled(false);
             mqttBinder.setNotification("您的身份审核已经通过了，赶紧去登陆系统吧。");
+            Hawk.put("loginType", authCheckBean.getType());
+            Hawk.put("loginNo", authCheckBean.getNo());
             Intent mainShowIntent=new Intent(AuthenticationStatusActivity.this,MainShowActivity.class);
             startActivity(mainShowIntent);
             finish();

@@ -173,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
             if ("admin".equals(inputUserName) && "adminwcedla".equals(inputPassword)) {
                 Intent adminIntent = new Intent(LoginActivity.this, AdminMainActivity.class);
                 Hawk.put("loginUser", inputUserName);
+                loginProgressDialog.cancelProgressDialog();
                 startActivity(adminIntent);
                 finish();
             } else {

@@ -3,6 +3,7 @@ package com.wcedla.driving_school.tool;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.orhanobut.hawk.Hawk;
 import com.orhanobut.logger.Logger;
 import com.wcedla.driving_school.bean.AuthCheckBean;
 
@@ -14,17 +15,24 @@ public class JsonUtils {
     public static int getLoginResult(String responseString) {
         String result = "";
         String auth = "";
+        String type="";
+        String no="";
         try {
             JSONObject jsonObject = new JSONObject(responseString);
             result = jsonObject.getString("status");
             auth = jsonObject.getString("auth");
+            type=jsonObject.getString("type");
+            no=jsonObject.getString("no");
         } catch (JSONException e) {
             e.printStackTrace();
             return 1;
         }
         if ("match".equals(result)) {
+
             if (auth.length() > 0) {
                 if ("审核通过".equals(auth)) {
+                    Hawk.put("loginType", type);
+                    Hawk.put("loginNo", no);
                     return -1;
                 } else {
                     return 0;

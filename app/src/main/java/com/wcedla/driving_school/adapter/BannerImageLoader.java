@@ -15,6 +15,7 @@ public class BannerImageLoader extends ImageLoader {
             RequestOptions options = new RequestOptions()
                     .override(context.getResources().getDisplayMetrics().widthPixels, (int)(context.getResources().getDisplayMetrics().density*150))
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .dontAnimate()
                     .centerCrop();
             //Log.d("aaaa", "大小 "+context.getResources().getDisplayMetrics().widthPixels+","+(int)context.getResources().getDisplayMetrics().density*150);
             Glide.with(context).load((String)path).apply(options).into(imageView);

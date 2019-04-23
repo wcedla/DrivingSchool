@@ -121,6 +121,8 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             if (authCheckBean != null && gotBanner&&gotSkill&&gotLaw&&gotMessage&&gotCoach&&gotStudent) {
                 if (authCheckBean.getStatus().equals("审核通过")) {
+                    Hawk.put("loginType", authCheckBean.getType());
+                    Hawk.put("loginNo", authCheckBean.getNo());
                     Intent mainShowIntent = new Intent(SplashActivity.this, MainShowActivity.class);
                     startActivity(mainShowIntent);
                     finish();
@@ -148,6 +150,8 @@ public class SplashActivity extends AppCompatActivity {
                     public void run() {
                         while (gotAuth && gotBanner&&gotSkill&&gotLaw&&gotMessage&&gotCoach&&gotStudent) {
                             if (authCheckBean.getStatus().equals("审核通过")) {
+                                Hawk.put("loginType", authCheckBean.getType());
+                                Hawk.put("loginNo", authCheckBean.getNo());
                                 Intent mainShowIntent = new Intent(SplashActivity.this, MainShowActivity.class);
                                 startActivity(mainShowIntent);
                                 finish();

@@ -162,7 +162,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         name = authenticationNameText.getText().toString().trim();
         no = authenticationNoText.getText().toString().trim();
         yzm = authenticationYzmText.getText().toString().trim();
-        if (name.length() >= 2 && no.length() == 11 && yzm.length() == 4) {
+        if (name.length() >= 2 && no.length() == 10 && yzm.length() == 4) {
             if (yzm.toLowerCase().equals(CodeUtils.getInstance().getCode().toLowerCase())) {
                 customProgressDialog = CustomProgressDialog.create(AuthenticationActivity.this, "正在发送...", false);
                 customProgressDialog.showProgressDialog();

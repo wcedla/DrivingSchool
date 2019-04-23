@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.orhanobut.hawk.Hawk;
+import com.orhanobut.logger.Logger;
 import com.wcedla.driving_school.R;
 import com.wcedla.driving_school.adapter.ViewPagerFragmentAdapter;
 import com.wcedla.driving_school.fragment.CoachFunctionalFragment;
@@ -30,6 +32,9 @@ public class MainShowActivity extends AppCompatActivity {
     @BindView(R.id.main_tab)
     TabLayout mainTab;
 
+    String loginUser;
+    String loginType;
+
     int[] tabDrawableArray = new int[]{R.drawable.tab_home_selecter, R.drawable.tab_function_selecter, R.drawable.tab_me_selecter};
     String[] tabTextArray = new String[]{"首页", "功能", "我的"};
 
@@ -43,6 +48,9 @@ public class MainShowActivity extends AppCompatActivity {
         ToolUtils.setNavigationBarStatusBarTranslucent(this, false, Color.parseColor("#000000"));
         setContentView(R.layout.activity_main_show);
         ButterKnife.bind(this);
+        loginUser= Hawk.get("loginUser","");
+        loginType=Hawk.get("loginType","");
+        Logger.d("主界面获取登录状态:"+loginUser+","+loginType);
         initView();
     }
 

@@ -77,11 +77,11 @@ public class AuthInfoShowAdapter extends RecyclerView.Adapter<AuthInfoShowAdapte
                 ((ShowAuthInfoActivity)context).recyclerViewHideInput();
                 if (authInfoHolder.authOk.getText().toString().equals("通过审核"))
                 {
-                    setAuthStatus(authInfoHolder.userText.getText().toString(),"审核通过",authBeanList.get(i).getType(),authBeanList.get(i).getNo(),authBeanList.get(i).getRealName());
+                    setAuthStatus(authInfoHolder.userText.getText().toString(),"审核通过",authBeanList.get(i).getType(),authBeanList.get(i).getNo());
                 }
                 else
                 {
-                    setAuthStatus(authInfoHolder.userText.getText().toString(),"审核未通过",authBeanList.get(i).getType(),"null","null");
+                    setAuthStatus(authInfoHolder.userText.getText().toString(),"审核未通过",authBeanList.get(i).getType(),authBeanList.get(i).getNo());
                 }
             }
         });
@@ -89,7 +89,7 @@ public class AuthInfoShowAdapter extends RecyclerView.Adapter<AuthInfoShowAdapte
             @Override
             public void onClick(View v) {
                 ((ShowAuthInfoActivity)context).recyclerViewHideInput();
-                setAuthStatus(authInfoHolder.userText.getText().toString(),"审核未通过","null","null","null");
+                setAuthStatus(authInfoHolder.userText.getText().toString(),"审核未通过",authBeanList.get(i).getType(),authBeanList.get(i).getNo());
             }
         });
     }
@@ -123,9 +123,9 @@ public class AuthInfoShowAdapter extends RecyclerView.Adapter<AuthInfoShowAdapte
         }
     }
 
-    private void setAuthStatus(String user,String status,String type,String no,String realName)
+    private void setAuthStatus(String user,String status,String type,String no)
     {
-        String url= HttpUtils.setParameterForUrl(AUTHENTICATION_SET_STATUS_URL,"userName",user,"status",status,"type",type,"no",no,"realName",realName);
+        String url= HttpUtils.setParameterForUrl(AUTHENTICATION_SET_STATUS_URL,"userName",user,"status",status,"type",type,"no",no);
         HttpUtils.doHttpRequest(url, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
