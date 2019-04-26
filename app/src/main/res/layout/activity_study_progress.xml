@@ -2,15 +2,15 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/user_search_root"
+    android:id="@+id/study_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#4CAF50"
     android:fitsSystemWindows="true"
-    tools:context=".activity.UserSearchActivity">
+    tools:context=".activity.StudyProgressActivity">
 
     <RelativeLayout
-        android:id="@+id/search_head_root"
+        android:id="@+id/study_progress_head_root"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/user_search_back"
+            android:id="@+id/study_progress_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
@@ -27,33 +27,32 @@
             android:src="@drawable/back" />
 
         <TextView
-            android:id="@+id/user_search_head"
+            android:id="@+id/study_progress_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="#4CAF50"
             android:gravity="center"
             android:padding="15dp"
-            android:text="查找学员"
+            android:text="学习进度"
             android:textAlignment="center"
             android:textColor="#FFF"
             android:textSize="16sp" />
 
     </RelativeLayout>
 
-
     <LinearLayout
-        android:id="@+id/search_root"
+        android:id="@+id/study_search_root"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#fafafa"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_head_root">
+        app:layout_constraintTop_toBottomOf="@+id/study_progress_head_root">
 
         <EditText
-            android:id="@+id/search_input"
+            android:id="@+id/study_search_input"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -72,7 +71,7 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/search_btn"
+            android:id="@+id/study_search_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -82,13 +81,13 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/user_info_show"
+        android:id="@+id/study_info_show"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#f1f1f1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_root" />
+        app:layout_constraintTop_toBottomOf="@id/study_search_root" />
 
 </android.support.constraint.ConstraintLayout>

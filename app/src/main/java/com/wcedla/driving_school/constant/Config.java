@@ -130,6 +130,12 @@ public class Config {
 
     public final static String GET_STUDENT_INFO="http://192.168.191.1:8080/DrivingSchoolServer/GetAllStudentServlet";
 
+    public final static String SEND_STUDENT_APPRAISE = "http://192.168.191.1:8080/DrivingSchoolServer/StudentAppraiseServlet";
+
+    public final static String GET_STUDY_INFO = "http://192.168.191.1:8080/DrivingSchoolServer/GetStudyInfoServlet";
+
+    public final static String UPDATE_STUDY_PROGRESS = "http://192.168.191.1:8080/DrivingSchoolServer/UpdateStudyServlet";
+
     public final static String EMAIL_SUBJECT = "驾校易管理邮箱码";
 
     public final static String EMAIL_CODE_TIME = "emailcodetime";

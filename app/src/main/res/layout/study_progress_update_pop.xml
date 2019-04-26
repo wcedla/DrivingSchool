@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f1f1f1">
+
+    <TextView
+        android:id="@+id/progress_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="进度:"
+        android:textColor="#000"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/progress_text"
+        app:layout_constraintBottom_toBottomOf="@id/progress_text" />
+
+    <TextView
+        android:id="@+id/progress_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="#fff"
+        android:text="倒车入库"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="10dp"
+        app:layout_constraintStart_toEndOf="@id/progress_head"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/time_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="时长:"
+        android:textColor="#000"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/time_text"
+        app:layout_constraintBottom_toBottomOf="@id/time_text" />
+
+    <EditText
+        android:id="@+id/time_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="#ffffff"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:hint="输入时长"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="17sp"
+        app:layout_constraintStart_toEndOf="@id/time_head"
+        app:layout_constraintEnd_toStartOf="@id/time_unit"
+        app:layout_constraintTop_toBottomOf="@id/progress_text" />
+
+    <TextView
+        android:id="@+id/time_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/time_text"
+        app:layout_constraintBottom_toBottomOf="@id/time_text"
+        app:layout_constraintEnd_toEndOf="@id/progress_text"
+        android:textColor="#000"
+        android:text="小时"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/time_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/time_text"
+        app:layout_constraintTop_toBottomOf="@id/time_text"
+        app:layout_constraintEnd_toEndOf="@id/time_text"
+        android:layout_marginTop="2dp"
+        android:text="本项目规定学习时长不得低于30小时"
+        android:textSize="14sp"
+        android:textColor="#F44336" />
+
+    <TextView
+        android:id="@+id/send_study_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time_tips"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textColor="#FF5722"
+        android:textSize="17sp"
+        android:text="提交" />
+
+</android.support.constraint.ConstraintLayout>

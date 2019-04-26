@@ -1,84 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
+    <com.wcedla.driving_school.customview.SplitLineGridview
+        android:id="@+id/function_item_grid"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:gravity="center"
+        android:horizontalSpacing="0dp"
+        android:verticalSpacing="0dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guide_line"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="#eeeeee">
-
-        <TextView
-            android:id="@+id/user_manager"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textColor="#000"
-            android:background="#eeeeee"
-            android:padding="18dp"
-            android:text="学员操作"/>
-
-        <TextView
-            android:id="@+id/study_manager"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_manager"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textColor="#000"
-            android:background="#eeeeee"
-            android:padding="18dp"
-            android:text="学习进度"/>
-
-        <TextView
-            android:id="@+id/exam_manager"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/study_manager"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textColor="#000"
-            android:background="#eeeeee"
-            android:padding="18dp"
-            android:text="考试管理"/>
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guide_line"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3"/>
-
-    <LinearLayout
-        android:id="@+id/function_root"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@id/guide_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <!--<include layout="@layout/user_function_item"/>-->
+    </com.wcedla.driving_school.customview.SplitLineGridview>
 
-        <!--<include layout="@layout/study_function_item"/>-->
 
-        <!--<include layout="@layout/exam_function_item"/>-->
-
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

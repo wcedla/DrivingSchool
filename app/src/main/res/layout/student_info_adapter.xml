@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="2dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/student_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="#FF5722"
+                android:gravity="start"
+                android:padding="15dp"
+                android:text="许晓楠"
+                android:textAlignment="viewStart"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/student_no_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_title"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="学员号:" />
+
+            <TextView
+                android:id="@+id/student_no_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="2019002333"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/student_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_title" />
+
+
+            <TextView
+                android:id="@+id/student_mobile_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_no_head"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="手机号:" />
+
+            <TextView
+                android:id="@+id/student_mobile_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="17859985768"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/student_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_no_head" />
+
+            <TextView
+                android:id="@+id/student_study_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_mobile_head"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="学习进度:" />
+
+            <TextView
+                android:id="@+id/student_study_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="熟练车辆"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/student_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_mobile_head" />
+
+            <TextView
+                android:id="@+id/student_exam_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_study_head"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="考试进度:" />
+
+            <TextView
+                android:id="@+id/student_exam_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="科目一预约成功"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/student_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_study_head" />
+
+            <TextView
+                android:id="@+id/student_star_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_exam_head"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="评价星数:" />
+
+            <TextView
+                android:id="@+id/student_star_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="5星"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/student_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_exam_head" />
+
+            <android.support.constraint.Barrier
+                android:id="@+id/student_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="right"
+                app:constraint_referenced_ids="student_no_head,student_mobile_head,student_study_head,student_exam_head,student_star_head" />
+
+            <View
+                android:id="@+id/student_split_line"
+                android:layout_width="0dp"
+                android:layout_height="1sp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_star_head"
+                android:background="#b9b9b9" />
+
+            <Button
+                android:id="@+id/student_call"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/student_star"
+                app:layout_constraintTop_toBottomOf="@id/student_split_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="#00000000"
+                android:text="打电话"
+                android:textColor="#f00" />
+
+            <Button
+                android:id="@+id/student_star"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/student_call"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/student_split_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="#00000000"
+                android:text="评价TA"
+                android:textColor="#f00" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

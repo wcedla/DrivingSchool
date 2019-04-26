@@ -2,9 +2,7 @@ package com.wcedla.driving_school.tool;
 
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.orhanobut.hawk.Hawk;
-import com.orhanobut.logger.Logger;
 import com.wcedla.driving_school.bean.AuthCheckBean;
 
 import org.json.JSONException;
@@ -15,14 +13,14 @@ public class JsonUtils {
     public static int getLoginResult(String responseString) {
         String result = "";
         String auth = "";
-        String type="";
-        String no="";
+        String type = "";
+        String no = "";
         try {
             JSONObject jsonObject = new JSONObject(responseString);
             result = jsonObject.getString("status");
             auth = jsonObject.getString("auth");
-            type=jsonObject.getString("type");
-            no=jsonObject.getString("no");
+            type = jsonObject.getString("type");
+            no = jsonObject.getString("no");
         } catch (JSONException e) {
             e.printStackTrace();
             return 1;
@@ -168,6 +166,7 @@ public class JsonUtils {
             return 1;
         }
     }
+
 
 }
 
