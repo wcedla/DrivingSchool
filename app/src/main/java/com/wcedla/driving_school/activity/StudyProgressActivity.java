@@ -2,7 +2,6 @@ package com.wcedla.driving_school.activity;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,15 +11,11 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -62,7 +57,7 @@ public class StudyProgressActivity extends AppCompatActivity {
 
     public CustomProgressDialog customProgressDialog;
 
-    StudyInfoDataBean studyInfoDataBean;
+    public StudyInfoDataBean studyInfoDataBean;
     StudyInfoDataBean searchResultBean = new StudyInfoDataBean();
 
 
@@ -75,7 +70,7 @@ public class StudyProgressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_study_progress);
         ButterKnife.bind(this);
         no = Hawk.get("loginNo", "");
-        setInputFilter(studySearchInput, USERNAME_REGEX, 5);
+        setInputFilter(studySearchInput, USERNAME_REGEX, 10);
         getStudyData();
         customProgressDialog = CustomProgressDialog.create(this, "正在查找...", false);
         customProgressDialog.showProgressDialog();
@@ -118,7 +113,7 @@ public class StudyProgressActivity extends AppCompatActivity {
     public void searchBtnClick() {
         hideInputMethod(studySearchBtn);
         String name = studySearchInput.getText().toString().trim();
-        if (name.length() >= 2) {
+        if (name.length() >= 1) {
             searchResult(name);
         } else {
             Toast.makeText(this, "请输入正确的姓名!", Toast.LENGTH_SHORT).show();
@@ -133,7 +128,7 @@ public class StudyProgressActivity extends AppCompatActivity {
         if (studyInfoDataBean != null && studyInfoDataBean.getStudyInfo() != null) {
             List<StudyInfoDataBean.StudyInfoBean> studyInfoBeanList = new ArrayList<>();
             for (StudyInfoDataBean.StudyInfoBean studyInfoBean : studyInfoDataBean.getStudyInfo()) {
-                if (name.equals(studyInfoBean.getRealName())) {
+                if (studyInfoBean.getRealName().contains(name) || studyInfoBean.getStudentNo().contains(name)) {
                     studyInfoBeanList.add(studyInfoBean);
                 }
             }
@@ -184,19 +179,6 @@ public class StudyProgressActivity extends AppCompatActivity {
                 });
             }
         });
-    }
-
-    public void showPop() {
-        View progressView = LayoutInflater.from(this).inflate(R.layout.study_progress_select_pop, null);
-        PopupWindow progressPop = new PopupWindow(progressView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        // 设置PopupWindow的背景
-        progressPop.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        // 设置PopupWindow是否能响应外部点击事件
-        progressPop.setOutsideTouchable(true);
-        // 设置PopupWindow是否能响应点击事件
-        progressPop.setTouchable(true);
-        progressPop.setFocusable(true);
-        progressPop.showAtLocation(studyRoot, Gravity.BOTTOM, 0, 0);
     }
 
     /**

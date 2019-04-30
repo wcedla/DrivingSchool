@@ -19,7 +19,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.orhanobut.hawk.Hawk;
-import com.orhanobut.logger.Logger;
 import com.wcedla.driving_school.R;
 import com.wcedla.driving_school.activity.MessageActivity;
 import com.wcedla.driving_school.activity.ShowInfoActivity;
@@ -48,9 +47,8 @@ public class HomeFragment extends Fragment {
     LinearLayout studentRoot;
     float denisty;
 
-    public static HomeFragment getInstance(Bundle bundle)
-    {
-        HomeFragment homeFragment=new HomeFragment();
+    public static HomeFragment getInstance(Bundle bundle) {
+        HomeFragment homeFragment = new HomeFragment();
         homeFragment.setArguments(bundle);
         return homeFragment;
     }
@@ -58,7 +56,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         myActivity = (Activity) context;
-        denisty=context.getResources().getDisplayMetrics().density;
+        denisty = context.getResources().getDisplayMetrics().density;
         if (getArguments() != null) {
 //            number = getArguments().getInt("number");  //获取参数
         }
@@ -68,23 +66,23 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_home,container,false);
-        banner=view.findViewById(R.id.home_banner);
-        ImageView company=view.findViewById(R.id.item_company);
-        ImageView carSkill=view.findViewById(R.id.item_skill);
-        ImageView carLaw=view.findViewById(R.id.item_law);
-        ImageView message=view.findViewById(R.id.item_message);
-        coachRoot=view.findViewById(R.id.coach_root);
-        studentRoot=view.findViewById(R.id.student_root);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        banner = view.findViewById(R.id.home_banner);
+        ImageView company = view.findViewById(R.id.item_company);
+        ImageView carSkill = view.findViewById(R.id.item_skill);
+        ImageView carLaw = view.findViewById(R.id.item_law);
+        ImageView message = view.findViewById(R.id.item_message);
+        coachRoot = view.findViewById(R.id.coach_root);
+        studentRoot = view.findViewById(R.id.student_root);
         initBanner();
         initRecommendedData();
         company.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent infoIntent=new Intent(myActivity, ShowInfoActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putString("headText","公司简介");
-                bundle.putString("contentText",COMPANY_INTRODUCE);
+                Intent infoIntent = new Intent(myActivity, ShowInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("headText", "公司简介");
+                bundle.putString("contentText", COMPANY_INTRODUCE);
                 infoIntent.putExtras(bundle);
                 startActivity(infoIntent);
             }
@@ -92,10 +90,10 @@ public class HomeFragment extends Fragment {
         carSkill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent scrollInfoIntent=new Intent(myActivity, ShowScrollInfoActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putString("headText","学车技巧");
-                bundle.putString("initType","skill");
+                Intent scrollInfoIntent = new Intent(myActivity, ShowScrollInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("headText", "学车技巧");
+                bundle.putString("initType", "skill");
                 scrollInfoIntent.putExtras(bundle);
                 startActivity(scrollInfoIntent);
             }
@@ -103,10 +101,10 @@ public class HomeFragment extends Fragment {
         carLaw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent scrollInfoIntent=new Intent(myActivity, ShowScrollInfoActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putString("headText","驾考新规");
-                bundle.putString("initType","law");
+                Intent scrollInfoIntent = new Intent(myActivity, ShowScrollInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("headText", "驾考新规");
+                bundle.putString("initType", "law");
                 scrollInfoIntent.putExtras(bundle);
                 startActivity(scrollInfoIntent);
             }
@@ -114,7 +112,7 @@ public class HomeFragment extends Fragment {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent messageIntent=new Intent(myActivity, MessageActivity.class);
+                Intent messageIntent = new Intent(myActivity, MessageActivity.class);
                 startActivity(messageIntent);
             }
         });
@@ -128,16 +126,13 @@ public class HomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    private void initBanner()
-    {
-        List<String> imageList=new ArrayList<>();
-        List<String> titleList=new ArrayList<>();
-        String bannerData=Hawk.get("bannerData","");
-        if(bannerData.length()>0)
-        {
-            BannerDataBean bannerDataBean =new Gson().fromJson(bannerData, BannerDataBean.class);
-            for(BannerDataBean.BannerBean bannerBean:bannerDataBean.getBanner())
-            {
+    private void initBanner() {
+        List<String> imageList = new ArrayList<>();
+        List<String> titleList = new ArrayList<>();
+        String bannerData = Hawk.get("bannerData", "");
+        if (bannerData.length() > 0) {
+            BannerDataBean bannerDataBean = new Gson().fromJson(bannerData, BannerDataBean.class);
+            for (BannerDataBean.BannerBean bannerBean : bannerDataBean.getBanner()) {
                 imageList.add(bannerBean.getImg());
                 titleList.add(bannerBean.getText());
             }
@@ -179,63 +174,78 @@ public class HomeFragment extends Fragment {
         banner.start();
     }
 
-    private void initRecommendedData()
-    {
-        CoachRecommendedBean coachRecommendedBean=new CoachRecommendedBean();
-        StudentRecommendBean studentRecommendBean=new StudentRecommendBean();
-        String coachString=Hawk.get("coachData","");
-        String studentString = Hawk.get("studentData","");
+    private void initRecommendedData() {
+        CoachRecommendedBean coachRecommendedBean = new CoachRecommendedBean();
+        StudentRecommendBean studentRecommendBean = new StudentRecommendBean();
+        String coachString = Hawk.get("coachData", "");
+        String studentString = Hawk.get("studentData", "");
         try {
-            coachRecommendedBean=new Gson().fromJson(coachString,CoachRecommendedBean.class);
-            studentRecommendBean=new Gson().fromJson(studentString,StudentRecommendBean.class);
-        }catch (Exception e)
-        {
+            coachRecommendedBean = new Gson().fromJson(coachString, CoachRecommendedBean.class);
+            studentRecommendBean = new Gson().fromJson(studentString, StudentRecommendBean.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        if(coachRecommendedBean.getCoach()!=null)
-        {
+        if (coachRecommendedBean.getCoachAppraise() != null) {
             coachRoot.removeAllViews();
-            for(CoachRecommendedBean.CoachBean coachBean:coachRecommendedBean.getCoach())
-            {
-                View view=LayoutInflater.from(myActivity).inflate(R.layout.coach_recommended_item,coachRoot,false);
-                CircleImageView circleImageView=view.findViewById(R.id.head_img);
-                TextView nameText=view.findViewById(R.id.coach_name_text);
-                TextView driverYearText=view.findViewById(R.id.drive_year);
-                TextView startText=view.findViewById(R.id.recommend_star);
+            for (int i = 0; i < 5; i++) {
+                View view = LayoutInflater.from(myActivity).inflate(R.layout.coach_recommended_item, coachRoot, false);
+                CircleImageView circleImageView = view.findViewById(R.id.head_img);
+                TextView nameText = view.findViewById(R.id.coach_name_text);
+                TextView driverYearText = view.findViewById(R.id.drive_year);
+                TextView startText = view.findViewById(R.id.recommend_star);
                 //View splitView=view.findViewById(R.id.coach_split);
-                Glide.with(myActivity).load(coachBean.getHeadimg()).apply(requestOptions).into(circleImageView);
-                nameText.setText("姓名:"+coachBean.getName());
-                driverYearText.setText("驾龄:"+coachBean.getTime());
-                startText.setText("推荐指数:"+coachBean.getStar());
+                if (coachRecommendedBean.getCoachAppraise().get(i).getHeadImg() != null) {
+                    Glide.with(myActivity).load(coachRecommendedBean.getCoachAppraise().get(i).getHeadImg()).apply(requestOptions).into(circleImageView);
+                } else {
+                    Glide.with(myActivity).load(R.drawable.bsj).apply(requestOptions).into(circleImageView);
+                }
+
+                nameText.setText("姓名:" + coachRecommendedBean.getCoachAppraise().get(i).getRealName());
+
+                driverYearText.setText("驾龄:" + coachRecommendedBean.getCoachAppraise().get(i).getDriveAge());
+                if (coachRecommendedBean.getCoachAppraise().get(i).getStar() != null) {
+                    startText.setText("推荐指数:" + coachRecommendedBean.getCoachAppraise().get(i).getStar() + "星");
+                } else {
+                    startText.setText("推荐指数:暂无指数");
+                }
                 coachRoot.addView(view);
             }
         }
-        if (studentRecommendBean.getStudent()!=null)
-        {
+        if (studentRecommendBean.getStudentAppraise() != null) {
             studentRoot.removeAllViews();
-            for(int i=0;i<studentRecommendBean.getStudent().size();i++)
-            {
-                View view=LayoutInflater.from(myActivity).inflate(R.layout.student_recommended_item,studentRoot,false);
-                CircleImageView circleImageView=view.findViewById(R.id.student_head_img);
-                TextView nameText=view.findViewById(R.id.student_name_text);
-                TextView driverYearText=view.findViewById(R.id.student_drive_year);
-                TextView startText=view.findViewById(R.id.student_recommend_star);
-                View splitView=view.findViewById(R.id.student_split);
-                Glide.with(myActivity).load(studentRecommendBean.getStudent().get(i).getHeadImg()).apply(requestOptions).into(circleImageView);
-                nameText.setText("姓名:"+studentRecommendBean.getStudent().get(i).getName());
-                driverYearText.setText("学车时长:"+studentRecommendBean.getStudent().get(i).getTime());
-                startText.setText("教练评价:"+studentRecommendBean.getStudent().get(i).getStar());
-                if(i==studentRecommendBean.getStudent().size()-1)
-               {
-                  splitView.setVisibility(View.GONE);
-               }
+            for (int i = 0; i < 5; i++) {
+                View view = LayoutInflater.from(myActivity).inflate(R.layout.student_recommended_item, studentRoot, false);
+                CircleImageView circleImageView = view.findViewById(R.id.student_head_img);
+                TextView nameText = view.findViewById(R.id.student_name_text);
+                TextView driverYearText = view.findViewById(R.id.student_drive_year);
+                TextView startText = view.findViewById(R.id.student_recommend_star);
+                View splitView = view.findViewById(R.id.student_split);
+                if (studentRecommendBean.getStudentAppraise().get(i).getHeadImg() != null) {
+                    Glide.with(myActivity).load(studentRecommendBean.getStudentAppraise().get(i).getHeadImg()).apply(requestOptions).into(circleImageView);
+                } else {
+                    Glide.with(myActivity).load(R.drawable.bsj).apply(requestOptions).into(circleImageView);
+                }
+                nameText.setText("姓名:" + studentRecommendBean.getStudentAppraise().get(i).getRealName());
+                if (studentRecommendBean.getStudentAppraise().get(i).getTime() != null) {
+                    driverYearText.setText("学车时长:" + studentRecommendBean.getStudentAppraise().get(i).getTime() + "小时");
+                } else {
+                    driverYearText.setText("学车时长:暂未学习");
+                }
+                if (studentRecommendBean.getStudentAppraise().get(i).getStar() != null) {
+                    startText.setText("教练评价:" + studentRecommendBean.getStudentAppraise().get(i).getStar() + "星");
+                } else {
+                    startText.setText("教练评价:暂未评价");
+                }
+                if (i == 4) {
+                    splitView.setVisibility(View.GONE);
+                }
                 studentRoot.addView(view);
             }
         }
     }
 
-    RequestOptions requestOptions=new RequestOptions()
-            .override((int)(denisty*60),(int)(denisty*60))
+    RequestOptions requestOptions = new RequestOptions()
+            .override((int) (denisty * 60), (int) (denisty * 60))
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .dontAnimate();
 }

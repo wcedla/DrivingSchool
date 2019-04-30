@@ -15,14 +15,14 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.orhanobut.hawk.Hawk;
 import com.wcedla.driving_school.R;
-import com.wcedla.driving_school.adapter.StduentInfoAdapter;
-import com.wcedla.driving_school.bean.StudentDataBean;
+import com.wcedla.driving_school.adapter.ExamInfoShowAdapter;
+import com.wcedla.driving_school.bean.ExamInfoDataBean;
 import com.wcedla.driving_school.customview.CustomProgressDialog;
 import com.wcedla.driving_school.tool.HttpUtils;
 import com.wcedla.driving_school.tool.ToolUtils;
@@ -39,43 +39,41 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-import static com.wcedla.driving_school.constant.Config.GET_STUDENT_INFO;
+import static com.wcedla.driving_school.constant.Config.GET_EXAM_PROGRESS;
 import static com.wcedla.driving_school.constant.Config.USERNAME_REGEX;
 
-public class UserSearchActivity extends AppCompatActivity {
+public class ExamProgressActivity extends AppCompatActivity {
 
-
-    @BindView(R.id.search_input)
-    EditText searchInput;
-    @BindView(R.id.search_btn)
-    Button searchBtn;
-    @BindView(R.id.search_root)
-    LinearLayout searchRoot;
-    @BindView(R.id.user_info_show)
-    RecyclerView userInfoShow;
-    @BindView(R.id.user_search_root)
-    ConstraintLayout userSearchRoot;
+    @BindView(R.id.exam_progress_back)
+    ImageView examProgressBack;
+    @BindView(R.id.exam_search_input)
+    EditText examSearchInput;
+    @BindView(R.id.exam_search_btn)
+    Button examSearchBtn;
+    @BindView(R.id.exam_info_show)
+    RecyclerView examInfoShow;
+    @BindView(R.id.exam_root)
+    ConstraintLayout examRoot;
 
     public CustomProgressDialog customProgressDialog;
 
     String no;
 
-    public StudentDataBean studentDataBean;
-    StudentDataBean searchResultBean = new StudentDataBean();
-
+    public ExamInfoDataBean examInfoDataBean;
+    ExamInfoDataBean searchResultBean = new ExamInfoDataBean();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ToolUtils.setNavigationBarStatusBarTranslucent(this, false, Color.parseColor("#000000"));
-        setContentView(R.layout.activity_user_search);
+        setContentView(R.layout.activity_exam_progress);
         ButterKnife.bind(this);
         no = Hawk.get("loginNo", "");
-        setInputFilter(searchInput, USERNAME_REGEX, 10);
-        getStudentInfo();
+        setInputFilter(examSearchInput, USERNAME_REGEX, 10);
         customProgressDialog = CustomProgressDialog.create(this, "正在查找...", false);
         customProgressDialog.showProgressDialog();
-        searchInput.addTextChangedListener(new TextWatcher() {
+        getExamInfoData();
+        examSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -95,20 +93,25 @@ public class UserSearchActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.user_search_root)
-    public void rootClick() {
-        hideInputMethod(userSearchRoot);
+    @OnClick(R.id.exam_progress_back)
+    public void examBackClick() {
+        finish();
     }
 
-    @OnClick(R.id.search_input)
-    public void searchInputClick() {
-        showInputMethod(searchInput);
+    @OnClick(R.id.exam_root)
+    public void examRootClick() {
+        hideInputMethod(examRoot);
     }
 
-    @OnClick(R.id.search_btn)
-    public void searchBtnClick() {
-        hideInputMethod(searchBtn);
-        String name = searchInput.getText().toString().trim();
+    @OnClick(R.id.exam_search_input)
+    public void examSearchInputClick() {
+        showInputMethod(examSearchInput);
+    }
+
+    @OnClick(R.id.exam_search_btn)
+    public void examSearchBtnClick() {
+        hideInputMethod(examSearchBtn);
+        String name = examSearchInput.getText().toString().trim();
         if (name.length() >= 1) {
             searchResult(name);
         } else {
@@ -116,23 +119,40 @@ public class UserSearchActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.user_search_back)
-    public void searchBack()
-    {
-        finish();
+    private void searchResult(String name) {
+        if (examInfoDataBean != null && examInfoDataBean.getExamInfo() != null) {
+            List<ExamInfoDataBean.ExamInfoBean> examInfoBeanList = new ArrayList<>();
+            for (ExamInfoDataBean.ExamInfoBean examInfoBean : examInfoDataBean.getExamInfo()) {
+                if (examInfoBean.getRealName().contains(name) || examInfoBean.getStudentNo().contains(name)) {
+                    examInfoBeanList.add(examInfoBean);
+                }
+            }
+            searchResultBean.setExamInfo(examInfoBeanList);
+        }
+        ((ExamInfoShowAdapter) examInfoShow.getAdapter()).updateData(searchResultBean);
+    }
+
+    private void showAllStudent() {
+        if (examInfoDataBean != null & examInfoShow.getAdapter() != null) {
+            ((ExamInfoShowAdapter) examInfoShow.getAdapter()).updateData(examInfoDataBean);
+        }
     }
 
 
-    private void getStudentInfo() {
-        String url = HttpUtils.setParameterForUrl(GET_STUDENT_INFO, "no", no);
+    public void hideInput() {
+        hideInputMethod(examSearchInput);
+    }
+
+    private void getExamInfoData() {
+        String url = HttpUtils.setParameterForUrl(GET_EXAM_PROGRESS, "no", no);
         HttpUtils.doHttpRequest(url, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(UserSearchActivity.this, "查找学员出错!", Toast.LENGTH_SHORT).show();
-                        if (!UserSearchActivity.this.isFinishing() && customProgressDialog != null && customProgressDialog.isShowing()) {
+                        Toast.makeText(ExamProgressActivity.this, "查找考试进度出错!", Toast.LENGTH_SHORT).show();
+                        if (!ExamProgressActivity.this.isFinishing() && customProgressDialog != null && customProgressDialog.isShowing()) {
                             customProgressDialog.cancelProgressDialog();
                             finish();
                         }
@@ -142,45 +162,22 @@ public class UserSearchActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                studentDataBean = new Gson().fromJson(response.body().string(), StudentDataBean.class);
-                StduentInfoAdapter stduentInfoAdapter = new StduentInfoAdapter(UserSearchActivity.this, studentDataBean);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserSearchActivity.this);
+                examInfoDataBean = new Gson().fromJson(response.body().string(), ExamInfoDataBean.class);
+                ExamInfoShowAdapter adapter = new ExamInfoShowAdapter(ExamProgressActivity.this, examInfoDataBean);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ExamProgressActivity.this);
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        userInfoShow.setLayoutManager(linearLayoutManager);
-                        userInfoShow.setAdapter(stduentInfoAdapter);
-                        if (!UserSearchActivity.this.isFinishing() && customProgressDialog != null && customProgressDialog.isShowing()) {
+                        examInfoShow.setLayoutManager(linearLayoutManager);
+                        examInfoShow.setAdapter(adapter);
+                        if (!ExamProgressActivity.this.isFinishing() && customProgressDialog != null && customProgressDialog.isShowing()) {
                             customProgressDialog.cancelProgressDialog();
                         }
                     }
                 });
-
             }
         });
-    }
-
-    private void searchResult(String name) {
-        if (studentDataBean != null && studentDataBean.getStudentInfo() != null) {
-            List<StudentDataBean.StudentInfoBean> studentInfoBeanList = new ArrayList<>();
-            for (StudentDataBean.StudentInfoBean studentInfoBean : studentDataBean.getStudentInfo()) {
-                if (studentInfoBean.getRealName().contains(name) || studentInfoBean.getStudentNo().contains(name)) {
-                    studentInfoBeanList.add(studentInfoBean);
-                }
-            }
-            searchResultBean.setStudentInfo(studentInfoBeanList);
-        }
-        ((StduentInfoAdapter) userInfoShow.getAdapter()).updateData(searchResultBean);
-    }
-
-    private void showAllStudent() {
-        ((StduentInfoAdapter) userInfoShow.getAdapter()).updateData(studentDataBean);
-    }
-
-
-    public void hideInput() {
-        hideInputMethod(userSearchRoot);
     }
 
     /**
@@ -220,7 +217,7 @@ public class UserSearchActivity extends AppCompatActivity {
      * @param targetView 目标控件
      */
     private void hideInputMethod(View targetView) {
-        searchInput.setFocusable(false);
+        examSearchInput.setFocusable(false);
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (inputMethodManager != null) {
             if (inputMethodManager.isActive()) {

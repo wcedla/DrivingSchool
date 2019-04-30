@@ -10,18 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wcedla.driving_school.R;
-import com.wcedla.driving_school.activity.StudyProgressActivity;
-import com.wcedla.driving_school.activity.UserSearchActivity;
+import com.wcedla.driving_school.activity.MyCoachActivity;
 import com.wcedla.driving_school.bean.FunctionItemBean;
 
 import java.util.List;
 
-public class FunctionItemAdapter extends BaseAdapter {
-
+public class StudentGridAdapter extends BaseAdapter {
     Context context;
     List<FunctionItemBean> functionItemBeanList;
 
-    public FunctionItemAdapter(Context context, List<FunctionItemBean> functionItemBeanList) {
+    public StudentGridAdapter(Context context, List<FunctionItemBean> functionItemBeanList) {
         this.context = context;
         this.functionItemBeanList = functionItemBeanList;
     }
@@ -43,15 +41,15 @@ public class FunctionItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        FunctionItemAdapterHolder functionItemAdapterHolder;
+        StudentGridAdapter.FunctionItemAdapterHolder functionItemAdapterHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.adapter_admin_item, null);
-            functionItemAdapterHolder = new FunctionItemAdapterHolder();
+            functionItemAdapterHolder = new StudentGridAdapter.FunctionItemAdapterHolder();
             functionItemAdapterHolder.itemImage = convertView.findViewById(R.id.admin_adapter_img);
             functionItemAdapterHolder.itemName = convertView.findViewById(R.id.admin_adapter_name);
             convertView.setTag(functionItemAdapterHolder);
         }
-        functionItemAdapterHolder = (FunctionItemAdapterHolder) convertView.getTag();
+        functionItemAdapterHolder = (StudentGridAdapter.FunctionItemAdapterHolder) convertView.getTag();
         functionItemAdapterHolder.itemImage.setImageResource(functionItemBeanList.get(position).getImg());
         functionItemAdapterHolder.itemName.setText(functionItemBeanList.get(position).getTitle());
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -66,12 +64,14 @@ public class FunctionItemAdapter extends BaseAdapter {
     private void getClickEvent(int position) {
         switch (position) {
             case 0:
-                Intent userSearchIntent = new Intent(context, UserSearchActivity.class);
-                context.startActivity(userSearchIntent);
+                Intent myCoahIntent = new Intent(context, MyCoachActivity.class);
+                context.startActivity(myCoahIntent);
                 break;
             case 1:
-                Intent studyProgressIntent = new Intent(context, StudyProgressActivity.class);
-                context.startActivity(studyProgressIntent);
+
+                break;
+            case 2:
+
                 break;
             default:
                 break;

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wcedla.driving_school.R;
-import com.wcedla.driving_school.adapter.FunctionItemAdapter;
+import com.wcedla.driving_school.adapter.CoachGridAdapter;
 import com.wcedla.driving_school.bean.FunctionItemBean;
 import com.wcedla.driving_school.customview.SplitLineGridview;
 
@@ -50,7 +50,8 @@ public class CoachFunctionalFragment extends Fragment {
         functionItemBeanList.add(new FunctionItemBean(R.drawable.function_user_search, "学员查找"));
         functionItemBeanList.add(new FunctionItemBean(R.drawable.function_item_get_progress, "学习进度"));
         functionItemBeanList.add(new FunctionItemBean(R.drawable.function_item_exam_progress, "考试进度"));
-        FunctionItemAdapter functionItemAdapter = new FunctionItemAdapter(myActivity, functionItemBeanList);
+        // functionItemBeanList.add(new FunctionItemBean(R.drawable.reservation,"科目预约"));
+        CoachGridAdapter functionItemAdapter = new CoachGridAdapter(myActivity, functionItemBeanList);
         splitLineGridview.setAdapter(functionItemAdapter);
         return view;
     }

@@ -299,7 +299,9 @@ public class StduentInfoAdapter extends RecyclerView.Adapter<StduentInfoAdapter.
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                studentDataBean = new Gson().fromJson(response.body().string(), StudentDataBean.class);
+                StudentDataBean newData = new Gson().fromJson(response.body().string(), StudentDataBean.class);
+                ((UserSearchActivity) context).studentDataBean = newData;
+                studentDataBean = newData;
                 ((UserSearchActivity) context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

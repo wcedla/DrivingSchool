@@ -5,37 +5,35 @@ import java.util.List;
 public class StudentRecommendBean {
 
 
-    private List<StudentBean> student;
+    private List<StudentAppraiseBean> studentAppraise;
 
-    public List<StudentBean> getStudent() {
-        return student;
+    public List<StudentAppraiseBean> getStudentAppraise() {
+        return studentAppraise;
     }
 
-    public void setStudent(List<StudentBean> student) {
-        this.student = student;
+    public void setStudentAppraise(List<StudentAppraiseBean> studentAppraise) {
+        this.studentAppraise = studentAppraise;
     }
 
-    public static class StudentBean {
+    public static class StudentAppraiseBean {
         /**
-         * headImg : http://192.168.191.1:8080/DrivingSchoolServer/UserHeads/studentdemo.png
-         * star : 4星
-         * name : 孙红梅
-         * id : 1
-         * time : 225小时
+         * realName : 钟明喆
+         * star : 5
+         * time : 0
+         * headImg : http://192.168.191.1:8080/DrivingSchoolServer/UserHeads/2019002333.jpg
          */
 
-        private String headImg;
+        private String realName;
         private String star;
-        private String name;
-        private String id;
         private String time;
+        private String headImg;
 
-        public String getHeadImg() {
-            return headImg;
+        public String getRealName() {
+            return realName;
         }
 
-        public void setHeadImg(String headImg) {
-            this.headImg = headImg;
+        public void setRealName(String realName) {
+            this.realName = realName;
         }
 
         public String getStar() {
@@ -46,28 +44,20 @@ public class StudentRecommendBean {
             this.star = star;
         }
 
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
         public String getTime() {
             return time;
         }
 
         public void setTime(String time) {
             this.time = time;
+        }
+
+        public String getHeadImg() {
+            return headImg;
+        }
+
+        public void setHeadImg(String headImg) {
+            this.headImg = headImg;
         }
     }
 }

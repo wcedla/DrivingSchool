@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orhanobut.hawk.Hawk;
-import com.orhanobut.logger.Logger;
 import com.wcedla.driving_school.R;
 import com.wcedla.driving_school.bean.AuthCheckBean;
 import com.wcedla.driving_school.tool.HttpUtils;
@@ -41,6 +40,7 @@ public class SplashActivity extends AppCompatActivity {
     TimerTask timerTask;
     int time;
     String loginUser;
+    String no;
     boolean gotAuth;
     boolean gotBanner;
     boolean gotSkill;
@@ -48,6 +48,7 @@ public class SplashActivity extends AppCompatActivity {
     boolean gotMessage;
     boolean gotCoach;
     boolean gotStudent;
+    //boolean gotHeadImg;
     AuthCheckBean authCheckBean = null;
 
     @Override
@@ -58,15 +59,17 @@ public class SplashActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         gotAuth = false;
         gotBanner = false;
-        gotSkill=false;
-        gotLaw=false;
-        gotMessage=false;
-        gotCoach=false;
-        gotStudent=false;
+        gotSkill = false;
+        gotLaw = false;
+        gotMessage = false;
+        gotCoach = false;
+        gotStudent = false;
+        //gotHeadImg = false;
         time = 5;
         timer = new Timer();
         //Hawk.put("loginUser","wcedla");
         loginUser = Hawk.get("loginUser", "");
+        no = Hawk.get("loginNo", "");
         getBannerData();
         getSkillData();
         getLawData();
@@ -76,7 +79,6 @@ public class SplashActivity extends AppCompatActivity {
 
         if (loginUser.length() > 2 && !"admin".equals(loginUser)) {
             checkAuthStatus();
-
         }
         timerTask = new TimerTask() {
             @Override
@@ -119,54 +121,50 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(demo);
             finish();
         } else {
-            if (authCheckBean != null && gotBanner&&gotSkill&&gotLaw&&gotMessage&&gotCoach&&gotStudent) {
+            if (authCheckBean != null && gotBanner && gotSkill && gotLaw && gotMessage && gotCoach && gotStudent) {
                 if (authCheckBean.getStatus().equals("审核通过")) {
                     Hawk.put("loginType", authCheckBean.getType());
                     Hawk.put("loginNo", authCheckBean.getNo());
                     Intent mainShowIntent = new Intent(SplashActivity.this, MainShowActivity.class);
                     startActivity(mainShowIntent);
                     finish();
-                } else if(authCheckBean.getStatus().equals("审核未通过")||authCheckBean.getStatus().equals("审核中")){
+                } else if (authCheckBean.getStatus().equals("审核未通过") || authCheckBean.getStatus().equals("审核中")) {
                     Intent noPassAuthIntent = new Intent(SplashActivity.this, AuthenticationStatusActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("userName", loginUser);
                     noPassAuthIntent.putExtras(bundle);
                     startActivity(noPassAuthIntent);
                     finish();
-                }
-                else
-                {
+                } else {
                     Hawk.delete("loginUser");
-                    Intent loginIntent=new Intent(this,LoginActivity.class);
+                    Intent loginIntent = new Intent(this, LoginActivity.class);
                     startActivity(loginIntent);
                 }
 
-            } else if (gotAuth && gotBanner&&gotSkill&&gotLaw&&gotMessage&&gotCoach&&gotStudent) {
+            } else if (gotAuth && gotBanner && gotSkill && gotLaw && gotMessage && gotCoach && gotStudent) {
                 finish();
                 Toast.makeText(SplashActivity.this, "出现错误", Toast.LENGTH_SHORT).show();
             } else {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        while (gotAuth && gotBanner&&gotSkill&&gotLaw&&gotMessage&&gotCoach&&gotStudent) {
+                        while (gotAuth && gotBanner && gotSkill && gotLaw && gotMessage && gotCoach && gotStudent) {
                             if (authCheckBean.getStatus().equals("审核通过")) {
                                 Hawk.put("loginType", authCheckBean.getType());
                                 Hawk.put("loginNo", authCheckBean.getNo());
                                 Intent mainShowIntent = new Intent(SplashActivity.this, MainShowActivity.class);
                                 startActivity(mainShowIntent);
                                 finish();
-                            } else if(authCheckBean.getStatus().equals("审核未通过")||authCheckBean.getStatus().equals("审核中")){
+                            } else if (authCheckBean.getStatus().equals("审核未通过") || authCheckBean.getStatus().equals("审核中")) {
                                 Intent noPassAuthIntent = new Intent(SplashActivity.this, AuthenticationStatusActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("userName", loginUser);
                                 noPassAuthIntent.putExtras(bundle);
                                 startActivity(noPassAuthIntent);
                                 finish();
-                            }
-                            else
-                            {
+                            } else {
                                 Hawk.delete("loginUser");
-                                Intent loginIntent=new Intent(SplashActivity.this,LoginActivity.class);
+                                Intent loginIntent = new Intent(SplashActivity.this, LoginActivity.class);
                                 startActivity(loginIntent);
                             }
                             break;
@@ -231,8 +229,7 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
-    private void getSkillData()
-    {
+    private void getSkillData() {
         HttpUtils.doHttpRequest(GET_SKILL_URL, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -250,13 +247,12 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Hawk.put("skillData", response.body().string());
-                gotSkill=true;
+                gotSkill = true;
             }
         });
     }
 
-    private void getLawData()
-    {
+    private void getLawData() {
         HttpUtils.doHttpRequest(GET_LAW_URL, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -273,14 +269,13 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Hawk.put("lawData",response.body().string());
-                gotLaw=true;
+                Hawk.put("lawData", response.body().string());
+                gotLaw = true;
             }
         });
     }
 
-    private void getMessageData()
-    {
+    private void getMessageData() {
         HttpUtils.doHttpRequest(GET_MESSAGE_URL, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -297,14 +292,13 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Hawk.put("messageData",response.body().string());
-                gotMessage=true;
+                Hawk.put("messageData", response.body().string());
+                gotMessage = true;
             }
         });
     }
 
-    private void getCoachRecommended()
-    {
+    private void getCoachRecommended() {
         HttpUtils.doHttpRequest(GET_COACH_RECOMMENDED, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -321,14 +315,13 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Hawk.put("coachData",response.body().string());
-                gotCoach=true;
+                Hawk.put("coachData", response.body().string());
+                gotCoach = true;
             }
         });
     }
 
-    private void getStudentRecommended()
-    {
+    private void getStudentRecommended() {
         HttpUtils.doHttpRequest(GET_STUDENT_RECOMMENDED, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -345,11 +338,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Hawk.put("studentData",response.body().string());
-                gotStudent=true;
+                Hawk.put("studentData", response.body().string());
+                gotStudent = true;
             }
         });
     }
+
 
     /**
      * 隐藏虚拟按键，并且全屏

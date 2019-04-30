@@ -8,7 +8,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -32,127 +31,113 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+import static com.wcedla.driving_school.constant.Config.CHECK_PASSWORD;
 import static com.wcedla.driving_school.constant.Config.INPUTMETHOD_DELAY;
 import static com.wcedla.driving_school.constant.Config.PASSWORD_MAX_LENGTH;
 import static com.wcedla.driving_school.constant.Config.PASSWORD_MIN_LENGTH;
 import static com.wcedla.driving_school.constant.Config.PASSWORD_REGEX;
-import static com.wcedla.driving_school.constant.Config.RESET_PASSWORD_URL;
 
-public class ResetPasswordActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends AppCompatActivity {
 
-    @BindView(R.id.new_password_text)
-    EditText newPasswordText;
-    @BindView(R.id.reset_btn)
-    Button resetBtn;
-    @BindView(R.id.reset_password_layout)
-    ConstraintLayout resetPasswordLayout;
+    @BindView(R.id.origin_password_text)
+    EditText originPasswordText;
+    @BindView(R.id.confirm_btn)
+    Button confirmBtn;
+    @BindView(R.id.change_password_layout)
+    ConstraintLayout changePasswordLayout;
 
-    String userName = "";
+    CustomProgressDialog customProgressDialog;
 
-    CustomProgressDialog progressDialog=null;
+    String loginUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ToolUtils.setNavigationBarStatusBarTranslucent(this, true, false);
-        setContentView(R.layout.activity_reset_password);
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
-            Toast.makeText(ResetPasswordActivity.this, "出现了一些问题！", Toast.LENGTH_SHORT).show();
-            finish();
-        } else {
-            userName = bundle.getString("userName");
-            Log.d("wcedlaLog", "用户名: " + userName);
-        }
+        setContentView(R.layout.activity_change_password);
         ButterKnife.bind(this);
+        loginUser = Hawk.get("loginUser", "");
+        customProgressDialog = CustomProgressDialog.create(this, "正在验证...", false);
         delayTask(new Runnable() {
             @Override
             public void run() {
-                showInputMethod(newPasswordText);
+                showInputMethod(originPasswordText);
             }
         }, INPUTMETHOD_DELAY);
-        setInputFilter(newPasswordText, PASSWORD_REGEX, PASSWORD_MAX_LENGTH);
-
+        setInputFilter(originPasswordText, PASSWORD_REGEX, PASSWORD_MAX_LENGTH);
     }
 
-    @OnClick(R.id.reset_password_layout)
-    public void resetLayoutClick() {
-        hideInputMethod(resetPasswordLayout);
+    @OnClick(R.id.change_password_layout)
+    public void cangeRootClick() {
+        hideInputMethod(changePasswordLayout);
     }
 
-    @OnClick(R.id.reset_btn)
-    public void resetButtonClick() {
-        hideInputMethod(resetPasswordLayout);
-        progressDialog=CustomProgressDialog.create(this,"正在重置密码...",false);
-        String newPassword = newPasswordText.getText().toString().trim();
-        if (newPassword.length() >= PASSWORD_MIN_LENGTH && newPassword.length() <= PASSWORD_MAX_LENGTH) {
-            newPassword=ToolUtils.MD5Encrypted(newPassword);
-            progressDialog.showProgressDialog();
-            String url = HttpUtils.setParameterForUrl(RESET_PASSWORD_URL, "userName", userName, "password", newPassword);
-            Log.d("wcedlaLog", "密码网址: "+url);
+    @OnClick(R.id.origin_password_text)
+    public void originTextClick() {
+        showInputMethod(originPasswordText);
+    }
+
+    @OnClick(R.id.confirm_btn)
+    public void confimClick() {
+        hideInputMethod(confirmBtn);
+        customProgressDialog.showProgressDialog();
+        checkPassword();
+    }
+
+    private void checkPassword() {
+        String password = originPasswordText.getText().toString().trim();
+
+        if (password.length() >= PASSWORD_MIN_LENGTH && password.length() <= PASSWORD_MAX_LENGTH) {
+            password = ToolUtils.MD5Encrypted(password);
+            String url = HttpUtils.setParameterForUrl(CHECK_PASSWORD, "userName", loginUser, "password", password);
             HttpUtils.doHttpRequest(url, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(ResetPasswordActivity.this,"连接出现了一些问题！",Toast.LENGTH_SHORT).show();
-                            progressDialog.cancelProgressDialog();
+                            customProgressDialog.cancelProgressDialog();
+                            Toast.makeText(ChangePasswordActivity.this, "验证失败，请重试！", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    String responseString =response.body().string();
-                    int result= JsonUtils.getResetStatus(responseString);
-                    if(result==-1)
-                    {
+                    int result = JsonUtils.getCheckPasswordStatus(response.body().string());
+                    if (result == -1) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                progressDialog.cancelProgressDialog();
+                                customProgressDialog.cancelProgressDialog();
+                                Intent newPasswordIntent = new Intent(ChangePasswordActivity.this, ResetPasswordActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("userName", loginUser);
+                                newPasswordIntent.putExtras(bundle);
+                                startActivity(newPasswordIntent);
                                 finish();
-                                Toast.makeText(ResetPasswordActivity.this,"密码重置成功！",Toast.LENGTH_SHORT).show();
-                                if (Hawk.get("loginUser", "").length() > 0) {
-                                    Hawk.delete("loginType");
-                                    Hawk.delete("newHead");
-                                    Hawk.delete("loginNo");
-                                    Hawk.delete("loginUser");
-                                    Intent loginIntent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
-                                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    finish();
-                                    startActivity(loginIntent);
-                                }
                             }
                         });
-                    }
-                    else
-                    {
+                    } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                progressDialog.cancelProgressDialog();
-                                Toast.makeText(ResetPasswordActivity.this,"密码重置失败！",Toast.LENGTH_SHORT).show();
+                                customProgressDialog.cancelProgressDialog();
+                                Toast.makeText(ChangePasswordActivity.this, "验证失败，请确认密码正确！", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
+
+
                 }
             });
+        } else {
+            customProgressDialog.cancelProgressDialog();
+            Toast.makeText(ChangePasswordActivity.this, "请输入正确的密码", Toast.LENGTH_SHORT).show();
         }
-        else
-        {
-            Toast.makeText(ResetPasswordActivity.this,"请输入新密码！",Toast.LENGTH_SHORT).show();
-        }
+
 
     }
-
-    @OnClick(R.id.new_password_text)
-    public void newPasswordClick() {
-        newPasswordText.setFocusable(true);
-        showInputMethod(newPasswordText);
-    }
-
 
     /**
      * 弹出输入法
@@ -173,7 +158,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
      * @param targetView 目标控件
      */
     private void hideInputMethod(View targetView) {
-        newPasswordText.setFocusable(false);
+        originPasswordText.setFocusable(false);
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (inputMethodManager != null) {
             if (inputMethodManager.isActive()) {
@@ -217,7 +202,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         delayTask(new Runnable() {
             @Override
             public void run() {
-                showInputMethod(newPasswordText);
+                showInputMethod(originPasswordText);
             }
         }, INPUTMETHOD_DELAY);
     }

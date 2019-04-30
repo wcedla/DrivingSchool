@@ -5,37 +5,51 @@ import java.util.List;
 public class CoachRecommendedBean {
 
 
-    private List<CoachBean> coach;
+    private List<CoachAppraiseBean> coachAppraise;
 
-    public List<CoachBean> getCoach() {
-        return coach;
+    public List<CoachAppraiseBean> getCoachAppraise() {
+        return coachAppraise;
     }
 
-    public void setCoach(List<CoachBean> coach) {
-        this.coach = coach;
+    public void setCoachAppraise(List<CoachAppraiseBean> coachAppraise) {
+        this.coachAppraise = coachAppraise;
     }
 
-    public static class CoachBean {
+    public static class CoachAppraiseBean {
         /**
-         * headimg : http://192.168.191.1:8080/DrivingSchoolServer/UserHeads/headdemo.png
-         * star : 4星
-         * name : 李晓明
-         * id : 1
-         * time : 7年
+         * realName : 温龙安
+         * driveAge : 3年
+         * headImg : http://192.168.191.1:8080/DrivingSchoolServer/UserHeads/2019001016.jpg
+         * star : 5
          */
 
-        private String headimg;
+        private String realName;
+        private String driveAge;
+        private String headImg;
         private String star;
-        private String name;
-        private String id;
-        private String time;
 
-        public String getHeadimg() {
-            return headimg;
+        public String getRealName() {
+            return realName;
         }
 
-        public void setHeadimg(String headimg) {
-            this.headimg = headimg;
+        public void setRealName(String realName) {
+            this.realName = realName;
+        }
+
+        public String getDriveAge() {
+            return driveAge;
+        }
+
+        public void setDriveAge(String driveAge) {
+            this.driveAge = driveAge;
+        }
+
+        public String getHeadImg() {
+            return headImg;
+        }
+
+        public void setHeadImg(String headImg) {
+            this.headImg = headImg;
         }
 
         public String getStar() {
@@ -44,30 +58,6 @@ public class CoachRecommendedBean {
 
         public void setStar(String star) {
             this.star = star;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getTime() {
-            return time;
-        }
-
-        public void setTime(String time) {
-            this.time = time;
         }
     }
 }

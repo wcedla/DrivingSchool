@@ -17,13 +17,23 @@ import com.wcedla.driving_school.R;
 import com.wcedla.driving_school.adapter.ViewPagerFragmentAdapter;
 import com.wcedla.driving_school.fragment.CoachFunctionalFragment;
 import com.wcedla.driving_school.fragment.HomeFragment;
+import com.wcedla.driving_school.fragment.MeFragment;
+import com.wcedla.driving_school.fragment.StudentFunctionalFragment;
+import com.wcedla.driving_school.tool.HttpUtils;
+import com.wcedla.driving_school.tool.JsonUtils;
 import com.wcedla.driving_school.tool.ToolUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
+import static com.wcedla.driving_school.constant.Config.GET_USER_HEAD;
 
 public class MainShowActivity extends AppCompatActivity {
 
@@ -34,6 +44,7 @@ public class MainShowActivity extends AppCompatActivity {
 
     String loginUser;
     String loginType;
+    String loginNo;
 
     int[] tabDrawableArray = new int[]{R.drawable.tab_home_selecter, R.drawable.tab_function_selecter, R.drawable.tab_me_selecter};
     String[] tabTextArray = new String[]{"首页", "功能", "我的"};
@@ -50,8 +61,10 @@ public class MainShowActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         loginUser= Hawk.get("loginUser","");
         loginType=Hawk.get("loginType","");
-        Logger.d("主界面获取登录状态:"+loginUser+","+loginType);
+        loginNo = Hawk.get("loginNo", "");
+        Logger.d("主界面获取登录状态:" + loginUser + "," + loginType + "," + loginNo);
         initView();
+        getUserHeadImg();
     }
 
     private void initView() {
@@ -86,9 +99,15 @@ public class MainShowActivity extends AppCompatActivity {
         }
         HomeFragment homeFragment = HomeFragment.getInstance(new Bundle());
         fragmentList.add(homeFragment);
-        CoachFunctionalFragment coachFunctionalFragment = CoachFunctionalFragment.getInstance(new Bundle());
-        fragmentList.add(coachFunctionalFragment);
-        HomeFragment fragment = HomeFragment.getInstance(new Bundle());
+        if ("教练".equals(loginType)) {
+            CoachFunctionalFragment coachFunctionalFragment = CoachFunctionalFragment.getInstance(new Bundle());
+            fragmentList.add(coachFunctionalFragment);
+        } else if ("学员".equals(loginType)) {
+            StudentFunctionalFragment studentFunctionalFragment = StudentFunctionalFragment.getInstance(new Bundle());
+            fragmentList.add(studentFunctionalFragment);
+        }
+
+        MeFragment fragment = MeFragment.getInstance(new Bundle());
         fragmentList.add(fragment);
         ViewPagerFragmentAdapter viewPagerFragmentAdapter = new ViewPagerFragmentAdapter(getSupportFragmentManager(), fragmentList);
         mainViewPager.setAdapter(viewPagerFragmentAdapter);
@@ -107,12 +126,15 @@ public class MainShowActivity extends AppCompatActivity {
                     tab.select();
                 }
                 if (i == 1) {
+                    mainHeadText.setVisibility(View.VISIBLE);
                     mainHeadText.setText("功能");
                 } else if (i == 2) {
-                    mainHeadText.setText("我的");
+                    mainHeadText.setText("");
+                    mainHeadText.setVisibility(View.GONE);
                 }
                 else if(i==0)
                 {
+                    mainHeadText.setVisibility(View.VISIBLE);
                     mainHeadText.setText("首页");
                 }
             }
@@ -123,5 +145,20 @@ public class MainShowActivity extends AppCompatActivity {
             }
         });
         // mainTab.setupWithViewPager(mainViewPager);
+    }
+
+    private void getUserHeadImg() {
+        String url = HttpUtils.setParameterForUrl(GET_USER_HEAD, "no", loginNo);
+        HttpUtils.doHttpRequest(url, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String headUrl = JsonUtils.getHeadImgStatus(response.body().string());
+                Hawk.put("headImg", headUrl);
+            }
+        });
     }
 }

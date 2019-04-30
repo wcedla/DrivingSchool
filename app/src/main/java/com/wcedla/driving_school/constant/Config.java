@@ -53,6 +53,11 @@ public class Config {
     public final static String YZM_REGEX = "^[A-Za-z0-9]+$";
 
     /**
+     * 验证手机号是否合法
+     */
+    public final static String MOBILE_REGEX = "^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\\d{8}$";
+
+    /**
      * 用户名允许的最长输入长度
      */
     public final static int USERNAME_MAX_LENGTH = 12;
@@ -98,7 +103,7 @@ public class Config {
      */
     public final static String REGISTER_URL = "http://192.168.191.1:8080/DrivingSchoolServer/UserRegister";
 
-    public final static String CHECK_NICK_NAME_EXIST="http://192.168.191.1:8080/DrivingSchoolServer/GetNickNameExistServlet";
+    public final static String CHECK_NICK_NAME_EXIST = "http://192.168.191.1:8080/DrivingSchoolServer/GetNickNameExistServlet";
 
     public final static String GET_EMAIL_URL = "http://192.168.191.1:8080/DrivingSchoolServer/GetEmail";
 
@@ -116,25 +121,45 @@ public class Config {
 
     public final static String GET_BANNER_URL = "http://192.168.191.1:8080/DrivingSchoolServer/GetBannerServlet";
 
-    public final static String GET_SKILL_URL="http://192.168.191.1:8080/DrivingSchoolServer/GetSkillInfoServlet";
+    public final static String GET_SKILL_URL = "http://192.168.191.1:8080/DrivingSchoolServer/GetSkillInfoServlet";
 
-    public final static String GET_LAW_URL="http://192.168.191.1:8080/DrivingSchoolServer/GetLawInfoServlet";
+    public final static String GET_LAW_URL = "http://192.168.191.1:8080/DrivingSchoolServer/GetLawInfoServlet";
 
-    public final static String GET_MESSAGE_URL="http://192.168.191.1:8080/DrivingSchoolServer/GetMessageServlet";
+    public final static String GET_MESSAGE_URL = "http://192.168.191.1:8080/DrivingSchoolServer/GetMessageServlet";
 
-    public final static String SEND_MESSAGE_URL="http://192.168.191.1:8080/DrivingSchoolServer/SendMessageServlet";
+    public final static String SEND_MESSAGE_URL = "http://192.168.191.1:8080/DrivingSchoolServer/SendMessageServlet";
 
-    public final static String GET_COACH_RECOMMENDED="http://192.168.191.1:8080/DrivingSchoolServer/GetCoachRecommendedServlet";
+    public final static String GET_COACH_RECOMMENDED = "http://192.168.191.1:8080/DrivingSchoolServer/GetCoachRecommendedServlet";
 
-    public final static String GET_STUDENT_RECOMMENDED="http://192.168.191.1:8080/DrivingSchoolServer/GetStudentRecommendedServlet";
+    public final static String GET_STUDENT_RECOMMENDED = "http://192.168.191.1:8080/DrivingSchoolServer/GetStudentRecommendedServlet";
 
-    public final static String GET_STUDENT_INFO="http://192.168.191.1:8080/DrivingSchoolServer/GetAllStudentServlet";
+    public final static String GET_STUDENT_INFO = "http://192.168.191.1:8080/DrivingSchoolServer/GetAllStudentServlet";
 
     public final static String SEND_STUDENT_APPRAISE = "http://192.168.191.1:8080/DrivingSchoolServer/StudentAppraiseServlet";
 
     public final static String GET_STUDY_INFO = "http://192.168.191.1:8080/DrivingSchoolServer/GetStudyInfoServlet";
 
     public final static String UPDATE_STUDY_PROGRESS = "http://192.168.191.1:8080/DrivingSchoolServer/UpdateStudyServlet";
+
+    public final static String GET_EXAM_PROGRESS = "http://192.168.191.1:8080/DrivingSchoolServer/GetExamInfoServlet";
+
+    public final static String UPDATE_EXAM_PROGRESS = "http://192.168.191.1:8080/DrivingSchoolServer/UpdateExamServlet";
+
+    public final static String GET_USER_HEAD = "http://192.168.191.1:8080/DrivingSchoolServer/GetUserHeadServlet";
+
+    public final static String UPLOAD_USER_HEAD = "http://192.168.191.1:8080/DrivingSchoolServer/HeadUploadServlet";
+
+    public final static String SET_USER_HEAD = "http://192.168.191.1:8080/DrivingSchoolServer/SetUserHeadServlet";
+
+    public final static String GET_USER_INFO = "http://192.168.191.1:8080/DrivingSchoolServer/GetUserInfoServlet";
+
+    public final static String UPDATE_MOBILE_NUMBER = "http://192.168.191.1:8080/DrivingSchoolServer/UpdateMobileSrvlet";
+
+    public final static String CHECK_PASSWORD = "http://192.168.191.1:8080/DrivingSchoolServer/CheckPasswordServlet";
+
+    public final static String GET_MY_COACH = "http://192.168.191.1:8080/DrivingSchoolServer/GetMyCoachServlet";
+
+    public final static String SEND_COACH_APPRAISE = "http://192.168.191.1:8080/DrivingSchoolServer/CoachAppraiseServlet";
 
     public final static String EMAIL_SUBJECT = "驾校易管理邮箱码";
 

@@ -217,18 +217,18 @@ public class StudyInfoShowAdapter extends RecyclerView.Adapter<StudyInfoShowAdap
         HttpUtils.doHttpRequest(url, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                if (updatePopWindow != null && updatePopWindow.isShowing()) {
+
                     ((StudyProgressActivity) context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT).show();
                             ((StudyProgressActivity) context).customProgressDialog.cancelProgressDialog();
-                            updatePopWindow.dismiss();
-
+                            if (updatePopWindow != null && updatePopWindow.isShowing()) {
+                                updatePopWindow.dismiss();
+                            }
                         }
                     });
 
-                }
             }
 
             @Override
@@ -242,7 +242,9 @@ public class StudyInfoShowAdapter extends RecyclerView.Adapter<StudyInfoShowAdap
                         public void run() {
                             Toast.makeText(context, "提交失败！", Toast.LENGTH_SHORT).show();
                             ((StudyProgressActivity) context).customProgressDialog.cancelProgressDialog();
-                            updatePopWindow.dismiss();
+                            if (updatePopWindow != null && updatePopWindow.isShowing()) {
+                                updatePopWindow.dismiss();
+                            }
                         }
                     });
                 }
@@ -260,7 +262,9 @@ public class StudyInfoShowAdapter extends RecyclerView.Adapter<StudyInfoShowAdap
                     public void run() {
                         Toast.makeText(context, "刷新失败！", Toast.LENGTH_SHORT).show();
                         ((StudyProgressActivity) context).customProgressDialog.cancelProgressDialog();
-                        updatePopWindow.dismiss();
+                        if (updatePopWindow != null && updatePopWindow.isShowing()) {
+                            updatePopWindow.dismiss();
+                        }
                     }
                 });
             }
@@ -268,6 +272,7 @@ public class StudyInfoShowAdapter extends RecyclerView.Adapter<StudyInfoShowAdap
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 StudyInfoDataBean newData = new Gson().fromJson(response.body().string(), StudyInfoDataBean.class);
+                ((StudyProgressActivity) context).studyInfoDataBean = newData;
                 studyInfoDataBean = newData;
                 ((StudyProgressActivity) context).runOnUiThread(new Runnable() {
                     @Override
@@ -275,7 +280,9 @@ public class StudyInfoShowAdapter extends RecyclerView.Adapter<StudyInfoShowAdap
                         Toast.makeText(context, "提交成功！", Toast.LENGTH_SHORT).show();
                         ((StudyProgressActivity) context).customProgressDialog.cancelProgressDialog();
                         notifyDataSetChanged();
-                        updatePopWindow.dismiss();
+                        if (updatePopWindow != null && updatePopWindow.isShowing()) {
+                            updatePopWindow.dismiss();
+                        }
                     }
                 });
 

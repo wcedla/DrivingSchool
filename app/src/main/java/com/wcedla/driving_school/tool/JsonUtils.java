@@ -167,6 +167,38 @@ public class JsonUtils {
         }
     }
 
+    public static String getHeadImgStatus(String responseString) {
+        boolean result = false;
+        String headImg = "";
+        try {
+            JSONObject jsonObject = new JSONObject(responseString);
+            headImg = jsonObject.getString("head");
+            result = jsonObject.has("status");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (result) {
+            return "";
+        } else {
+            return headImg;
+        }
+    }
+
+    public static int getCheckPasswordStatus(String responseString) {
+        String result = "";
+        try {
+            JSONObject jsonObject = new JSONObject(responseString);
+            result = jsonObject.getString("status");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if ("match".equals(result)) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+
 
 }
 

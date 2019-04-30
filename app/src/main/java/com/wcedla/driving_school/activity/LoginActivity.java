@@ -1,11 +1,15 @@
 package com.wcedla.driving_school.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -31,6 +35,8 @@ import com.wcedla.driving_school.tool.JsonUtils;
 import com.wcedla.driving_school.tool.ToolUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -96,23 +102,23 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        String loginUser = Hawk.get("loginUser", "");
-        if (loginUser.length() > 2) {
-            if (loginUser.equals("admin")) {
-                Logger.d("获取到之前登陆的是管理员账号，跳转到管理员" + loginUser);
-                Intent demo = new Intent(this, AdminMainActivity.class);
-                startActivity(demo);
-                finish();
-            } else {
-                Logger.d("用户登录活动读取到用户之前已经成功登陆过，准备跳转到认证检查活动" + loginUser);
-                Intent authIntent = new Intent(LoginActivity.this, AuthenticationStatusActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("userName", loginUser);
-                authIntent.putExtras(bundle);
-                startActivity(authIntent);
-                finish();
-            }
-        }
+//        String loginUser = Hawk.get("loginUser", "");
+//        if (loginUser.length() > 2) {
+//            if (loginUser.equals("admin")) {
+//                Logger.d("获取到之前登陆的是管理员账号，跳转到管理员" + loginUser);
+//                Intent demo = new Intent(this, AdminMainActivity.class);
+//                startActivity(demo);
+//                finish();
+//            } else {
+//                Logger.d("用户登录活动读取到用户之前已经成功登陆过，准备跳转到认证检查活动" + loginUser);
+//                Intent authIntent = new Intent(LoginActivity.this, AuthenticationStatusActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("userName", loginUser);
+//                authIntent.putExtras(bundle);
+//                startActivity(authIntent);
+//                finish();
+//            }
+//        }
         //透明状态栏和导航栏
         ToolUtils.setNavigationBarStatusBarTranslucent(this, false, true);
         setContentView(R.layout.activity_login);
@@ -147,6 +153,17 @@ public class LoginActivity extends AppCompatActivity {
         //设置密码输入框输入筛选，允许字母输入
         setInputFilter(passwordText, PASSWORD_REGEX, PASSWORD_MAX_LENGTH);
 
+        List<String> permissionList = new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!permissionList.isEmpty()) {
+            String[] permissions = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(this, permissions, 1);
+        }
 
     }
 
@@ -392,6 +409,27 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         }, INPUTMETHOD_DELAY);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0) {
+                    for (int result : grantResults) {
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            Toast.makeText(this, "必须同意所有权限才能使用本程序", Toast.LENGTH_SHORT).show();
+                            finish();
+                            return;
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "发生未知错误", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
+            default:
+        }
     }
 
 }

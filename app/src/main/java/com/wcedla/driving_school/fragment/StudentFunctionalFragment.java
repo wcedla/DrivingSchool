@@ -10,6 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wcedla.driving_school.R;
+import com.wcedla.driving_school.adapter.StudentGridAdapter;
+import com.wcedla.driving_school.bean.FunctionItemBean;
+import com.wcedla.driving_school.customview.SplitLineGridview;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentFunctionalFragment extends Fragment {
 
     Activity myActivity;
@@ -35,6 +43,14 @@ public class StudentFunctionalFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_student_functional, container, false);
+        SplitLineGridview splitLineGridview = view.findViewById(R.id.function_item_grid);
+        List<FunctionItemBean> functionItemBeanList = new ArrayList<>();
+        functionItemBeanList.add(new FunctionItemBean(R.drawable.my_coach, "我的教练"));
+        functionItemBeanList.add(new FunctionItemBean(R.drawable.my_study, "我的学习"));
+        functionItemBeanList.add(new FunctionItemBean(R.drawable.my_exam, "我的考试"));
+        StudentGridAdapter studentGridAdapter = new StudentGridAdapter(myActivity, functionItemBeanList);
+        splitLineGridview.setAdapter(studentGridAdapter);
+        return view;
     }
 }

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.UserInfoActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/user_info_head_root"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#4CAF50">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_info_head"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/bsj"
+            android:layout_marginStart="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/user_info_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/user_info_head"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="30dp"
+            android:text="温龙安"
+            android:textSize="17sp"
+            android:textColor="#fff" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/nick_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_info_head_root"
+        android:textColor="#000"
+        android:padding="15dp"
+        android:textSize="17sp"
+        android:text="账户昵称:" />
+
+    <TextView
+        android:id="@+id/nick_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/user_info_barrier"
+        app:layout_constraintTop_toBottomOf="@id/user_info_head_root"
+        android:text="wcedla"
+        android:textSize="17sp"
+        android:padding="15dp"
+        android:textColor="#000" />
+
+    <View
+        android:id="@+id/nick_split"
+        android:layout_width="0dp"
+        android:layout_height="1sp"
+        android:background="#f1f1f1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nick_text" />
+
+    <TextView
+        android:id="@+id/student_no_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nick_text"
+        android:textColor="#000"
+        android:padding="15dp"
+        android:textSize="17sp"
+        android:text="学员号:" />
+
+    <TextView
+        android:id="@+id/student_no_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/user_info_barrier"
+        app:layout_constraintTop_toBottomOf="@id/nick_text"
+        android:text="2019002333"
+        android:textSize="17sp"
+        android:padding="15dp"
+        android:textColor="#000" />
+
+    <View
+        android:id="@+id/student_no_split"
+        android:layout_width="0dp"
+        android:layout_height="1sp"
+        android:background="#f1f1f1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_no_text" />
+
+
+    <TextView
+        android:id="@+id/coach_no_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_no_text"
+        android:textColor="#000"
+        android:padding="15dp"
+        android:textSize="17sp"
+        android:text="教练号:" />
+
+    <TextView
+        android:id="@+id/coach_no_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/user_info_barrier"
+        app:layout_constraintTop_toBottomOf="@id/student_no_text"
+        android:text="2019001016"
+        android:textSize="17sp"
+        android:padding="15dp"
+        android:textColor="#000" />
+
+    <View
+        android:id="@+id/coach_no_split"
+        android:layout_width="0dp"
+        android:layout_height="1sp"
+        android:background="#f1f1f1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/coach_no_text" />
+
+
+    <TextView
+        android:id="@+id/drive_year_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/coach_no_text"
+        android:textColor="#000"
+        android:padding="15dp"
+        android:textSize="17sp"
+        android:text="驾龄:" />
+
+    <TextView
+        android:id="@+id/drive_year_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/user_info_barrier"
+        app:layout_constraintTop_toBottomOf="@id/coach_no_text"
+        android:text="7年"
+        android:textSize="17sp"
+        android:padding="15dp"
+        android:textColor="#000" />
+
+    <View
+        android:id="@+id/drive_year_split"
+        android:layout_width="0dp"
+        android:layout_height="1sp"
+        android:background="#f1f1f1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drive_year_text" />
+
+
+    <TextView
+        android:id="@+id/enroll_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drive_year_text"
+        android:textColor="#000"
+        android:padding="15dp"
+        android:textSize="17sp"
+        android:text="报名时间:" />
+
+    <TextView
+        android:id="@+id/enroll_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/user_info_barrier"
+        app:layout_constraintTop_toBottomOf="@id/drive_year_text"
+        android:text="2019年12月5日"
+        android:textSize="17sp"
+        android:padding="15dp"
+        android:textColor="#000" />
+
+    <View
+        android:id="@+id/enroll_split"
+        android:layout_width="0dp"
+        android:layout_height="1sp"
+        android:background="#f1f1f1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enroll_text" />
+
+    <TextView
+        android:id="@+id/mobile_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enroll_text"
+        android:textColor="#000"
+        android:padding="15dp"
+        android:textSize="17sp"
+        android:text="手机号:" />
+
+    <TextView
+        android:id="@+id/mobile_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/user_info_barrier"
+        app:layout_constraintTop_toBottomOf="@id/enroll_text"
+        android:text="18350904693"
+        android:textSize="17sp"
+        android:padding="15dp"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/mobile_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/mobile_text"
+        app:layout_constraintBottom_toBottomOf="@id/mobile_text"
+        android:textColor="#F44336"
+        android:textSize="17sp"
+        android:text="修改" />
+
+    <View
+        android:id="@+id/mobile_split"
+        android:layout_width="0dp"
+        android:layout_height="1sp"
+        android:background="#f1f1f1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mobile_text" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/user_info_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="nick_head,student_no_head,coach_no_head,drive_year_head,enroll_head,mobile_head" />
+
+</android.support.constraint.ConstraintLayout>

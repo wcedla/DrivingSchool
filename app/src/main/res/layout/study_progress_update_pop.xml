@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/time_text"
         app:layout_constraintTop_toBottomOf="@id/time_text"
-        app:layout_constraintEnd_toEndOf="@id/time_text"
+        app:layout_constraintEnd_toEndOf="@id/time_unit"
         android:layout_marginTop="2dp"
         android:text="本项目规定学习时长不得低于30小时"
         android:textSize="14sp"

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4CAF50"
+    android:fitsSystemWindows="true"
+    tools:context=".activity.AboutActivity">
+
+    <RelativeLayout
+        android:id="@+id/about_head_root"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#4CAF50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/about_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/about_head_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="关于"
+            android:textAlignment="center"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/about_head_root">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+            <ImageView
+                android:id="@+id/about_logo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/about_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="驾校易管理"
+                android:textColor="#000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/about_logo" />
+
+            <TextView
+                android:id="@+id/about_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="v 1.0"
+                android:textColor="#000"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/about_name" />
+
+            <ImageView
+                android:id="@+id/about_log_head"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/log"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/about_version" />
+
+            <TextView
+                android:id="@+id/about_log_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="更新日志"
+                android:textColor="#000"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="@id/about_log_head"
+                app:layout_constraintStart_toEndOf="@id/about_log_head"
+                app:layout_constraintTop_toTopOf="@id/about_log_head" />
+
+            <TextView
+                android:id="@+id/app_log_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• 暂无更新日志"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_log_text"
+                app:layout_constraintTop_toBottomOf="@id/about_log_head" />
+
+            <ImageView
+                android:id="@+id/about_thanks_head"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/thanks"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/app_log_1" />
+
+            <TextView
+                android:id="@+id/about_thanks_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="感谢"
+                android:textColor="#000"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="@id/about_thanks_head"
+                app:layout_constraintStart_toEndOf="@id/about_thanks_head"
+                app:layout_constraintTop_toTopOf="@id/about_thanks_head" />
+
+            <TextView
+                android:id="@+id/about_thanks_glide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• Github开源库-Glide"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_head" />
+
+            <TextView
+                android:id="@+id/about_thanks_butterknife"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• Github开源库-Butterknife"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_glide" />
+
+            <TextView
+                android:id="@+id/about_thanks_okhttp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• Github开源库-Okhttp"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_butterknife" />
+
+            <TextView
+                android:id="@+id/about_thanks_eventbus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• Github开源库-Eventbus"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_okhttp" />
+
+            <TextView
+                android:id="@+id/about_thanks_gson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• Github开源库-Gson"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_eventbus" />
+
+            <TextView
+                android:id="@+id/about_thanks_logger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• Github开源库-Logger"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_gson" />
+
+            <TextView
+                android:id="@+id/about_thanks_hawk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• Github开源库-Hawk"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_logger" />
+
+            <TextView
+                android:id="@+id/about_thanks_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• Github开源库-Android Mail"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_hawk" />
+
+            <TextView
+                android:id="@+id/about_thanks_mqtt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• Github开源库-MQTT"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_mail" />
+
+            <TextView
+                android:id="@+id/about_thanks_banner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="• Github开源库-Banner"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_mqtt" />
+
+            <TextView
+                android:id="@+id/about_thanks_circle_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="20dp"
+                android:text="• Github开源库-Circle Image"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/about_thanks_text"
+                app:layout_constraintTop_toBottomOf="@id/about_thanks_banner" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.constraint.ConstraintLayout>
