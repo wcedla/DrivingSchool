@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/feeed_type_time_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="时长错误"
+        android:textSize="17sp"
+        android:textColor="#000"
+        android:textAlignment="center"
+        android:padding="10dp" />
+
+    <View
+        android:id="@+id/feed_type_split"
+        android:layout_width="0dp"
+        android:layout_height="1sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#f1f1f1"
+        app:layout_constraintTop_toBottomOf="@id/feeed_type_time_error" />
+
+    <TextView
+        android:id="@+id/feed_type_progress_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feed_type_split"
+        android:text="进度错误"
+        android:textSize="17sp"
+        android:textColor="#000"
+        android:textAlignment="center"
+        android:padding="10dp" />
+
+</android.support.constraint.ConstraintLayout>

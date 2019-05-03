@@ -18,14 +18,14 @@ public class StudentRecommendBean {
     public static class StudentAppraiseBean {
         /**
          * realName : 钟明喆
+         * enrollTime : 2019-01-03
          * star : 5
-         * time : 0
          * headImg : http://192.168.191.1:8080/DrivingSchoolServer/UserHeads/2019002333.jpg
          */
 
         private String realName;
+        private String enrollTime;
         private String star;
-        private String time;
         private String headImg;
 
         public String getRealName() {
@@ -36,20 +36,20 @@ public class StudentRecommendBean {
             this.realName = realName;
         }
 
+        public String getEnrollTime() {
+            return enrollTime;
+        }
+
+        public void setEnrollTime(String enrollTime) {
+            this.enrollTime = enrollTime;
+        }
+
         public String getStar() {
             return star;
         }
 
         public void setStar(String star) {
             this.star = star;
-        }
-
-        public String getTime() {
-            return time;
-        }
-
-        public void setTime(String time) {
-            this.time = time;
         }
 
         public String getHeadImg() {

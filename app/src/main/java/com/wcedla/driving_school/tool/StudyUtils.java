@@ -27,7 +27,7 @@ public class StudyUtils {
         } else if ("9".equals(code)) {
             return "灯光控制";
         } else if ("10".equals(code)) {
-            return "速度与档位相匹配训练";
+            return "速度与档位匹配";
         } else if ("11".equals(code)) {
             return "直线行驶";
         } else if ("12".equals(code)) {

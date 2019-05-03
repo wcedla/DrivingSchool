@@ -1,8 +1,10 @@
 package com.wcedla.driving_school.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.orhanobut.hawk.Hawk;
 import com.wcedla.driving_school.R;
+import com.wcedla.driving_school.activity.StudyInfoDetialActivity;
 import com.wcedla.driving_school.activity.StudyProgressActivity;
 import com.wcedla.driving_school.bean.StudyInfoDataBean;
 import com.wcedla.driving_school.tool.HttpUtils;
@@ -83,6 +86,16 @@ public class StudyInfoShowAdapter extends RecyclerView.Adapter<StudyInfoShowAdap
             @Override
             public void onClick(View v) {
                 updateProgress(studyInfoHolder.studentNo.getText().toString(), studyInfoHolder.studyProgress.getText().toString());
+            }
+        });
+        studyInfoHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent detialIntent = new Intent(context, StudyInfoDetialActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("no", studyInfoHolder.studentNo.getText().toString());
+                detialIntent.putExtras(bundle);
+                context.startActivity(detialIntent);
             }
         });
 

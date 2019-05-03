@@ -200,13 +200,13 @@ public class HomeFragment extends Fragment {
                     Glide.with(myActivity).load(R.drawable.bsj).apply(requestOptions).into(circleImageView);
                 }
 
-                nameText.setText("姓名:" + coachRecommendedBean.getCoachAppraise().get(i).getRealName());
+                nameText.setText("姓名: " + coachRecommendedBean.getCoachAppraise().get(i).getRealName());
 
-                driverYearText.setText("驾龄:" + coachRecommendedBean.getCoachAppraise().get(i).getDriveAge());
+                driverYearText.setText("驾龄: " + coachRecommendedBean.getCoachAppraise().get(i).getDriveAge());
                 if (coachRecommendedBean.getCoachAppraise().get(i).getStar() != null) {
-                    startText.setText("推荐指数:" + coachRecommendedBean.getCoachAppraise().get(i).getStar() + "星");
+                    startText.setText("推荐指数: " + coachRecommendedBean.getCoachAppraise().get(i).getStar() + "星");
                 } else {
-                    startText.setText("推荐指数:暂无指数");
+                    startText.setText("推荐指数: 暂无指数");
                 }
                 coachRoot.addView(view);
             }
@@ -225,16 +225,12 @@ public class HomeFragment extends Fragment {
                 } else {
                     Glide.with(myActivity).load(R.drawable.bsj).apply(requestOptions).into(circleImageView);
                 }
-                nameText.setText("姓名:" + studentRecommendBean.getStudentAppraise().get(i).getRealName());
-                if (studentRecommendBean.getStudentAppraise().get(i).getTime() != null) {
-                    driverYearText.setText("学车时长:" + studentRecommendBean.getStudentAppraise().get(i).getTime() + "小时");
-                } else {
-                    driverYearText.setText("学车时长:暂未学习");
-                }
+                nameText.setText("姓名: " + studentRecommendBean.getStudentAppraise().get(i).getRealName());
+                driverYearText.setText("报名时间: " + studentRecommendBean.getStudentAppraise().get(i).getEnrollTime());
                 if (studentRecommendBean.getStudentAppraise().get(i).getStar() != null) {
-                    startText.setText("教练评价:" + studentRecommendBean.getStudentAppraise().get(i).getStar() + "星");
+                    startText.setText("教练评价: " + studentRecommendBean.getStudentAppraise().get(i).getStar() + "星");
                 } else {
-                    startText.setText("教练评价:暂未评价");
+                    startText.setText("教练评价: 暂未评价");
                 }
                 if (i == 4) {
                     splitView.setVisibility(View.GONE);
