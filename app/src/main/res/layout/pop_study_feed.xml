@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:background="#ffffff"
         android:focusable="true"
         android:gravity="center_vertical"
@@ -63,9 +63,23 @@
         android:textColor="#000000"
         android:textColorHint="@android:color/darker_gray"
         android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/feed_time_head"
+        app:layout_constraintEnd_toStartOf="@id/feed_time_unit"
         app:layout_constraintTop_toBottomOf="@id/feed_type_text" />
+
+    <TextView
+        android:id="@+id/feed_time_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/feed_time_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/feed_time_text"
+        app:layout_constraintBottom_toBottomOf="@id/feed_time_text"
+        android:layout_marginEnd="20dp"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="17sp"
+        android:text="小时" />
 
     <TextView
         android:id="@+id/feed_progress_head"
@@ -99,6 +113,7 @@
         app:layout_constraintTop_toBottomOf="@id/feed_time_text" />
 
     <TextView
+        android:id="@+id/feed_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

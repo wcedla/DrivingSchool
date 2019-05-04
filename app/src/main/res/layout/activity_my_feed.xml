@@ -2,15 +2,15 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/my_study_root"
+    android:id="@+id/my_feed_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#4CAF50"
     android:fitsSystemWindows="true"
-    tools:context=".activity.MyStudyActivity">
+    tools:context=".activity.MyFeedActivity">
 
     <RelativeLayout
-        android:id="@+id/my_study_head_root"
+        android:id="@+id/my_feed_head_root"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/my_study_back"
+            android:id="@+id/my_feed_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
@@ -27,14 +27,14 @@
             android:src="@drawable/back" />
 
         <TextView
-            android:id="@+id/my_study_head_text"
+            android:id="@+id/my_feed_head_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="#4CAF50"
             android:gravity="center"
             android:padding="15dp"
-            android:text="我的学习"
+            android:text="我的报错"
             android:textAlignment="center"
             android:textColor="#FFF"
             android:textSize="16sp" />
@@ -42,17 +42,17 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/my_study_search_root"
+        android:id="@+id/my_feed_search_root"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#fafafa"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_study_head_root">
+        app:layout_constraintTop_toBottomOf="@+id/my_feed_head_root">
 
         <EditText
-            android:id="@+id/my_study_search_input"
+            android:id="@+id/my_feed_search_input"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -71,7 +71,7 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/my_study_search_btn"
+            android:id="@+id/my_feed_search_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
@@ -82,14 +82,13 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_all_study_info"
+        android:id="@+id/my_feed_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#fff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_study_search_root"
+        app:layout_constraintTop_toBottomOf="@id/my_feed_search_root"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>

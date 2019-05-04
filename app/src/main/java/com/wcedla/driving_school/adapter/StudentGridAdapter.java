@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.wcedla.driving_school.R;
 import com.wcedla.driving_school.activity.MyCoachActivity;
+import com.wcedla.driving_school.activity.MyExamActivity;
+import com.wcedla.driving_school.activity.MyFeedActivity;
 import com.wcedla.driving_school.activity.MyStudyActivity;
 import com.wcedla.driving_school.bean.FunctionItemBean;
 
@@ -73,7 +75,12 @@ public class StudentGridAdapter extends BaseAdapter {
                 context.startActivity(myStudyIntent);
                 break;
             case 2:
-
+                Intent myExamIntent = new Intent(context, MyExamActivity.class);
+                context.startActivity(myExamIntent);
+                break;
+            case 3:
+                Intent myFeedIntent = new Intent(context, MyFeedActivity.class);
+                context.startActivity(myFeedIntent);
                 break;
             default:
                 break;

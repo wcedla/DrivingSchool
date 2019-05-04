@@ -163,6 +163,18 @@ public class Config {
 
     public final static String GET_ALL_STUDY_INFO = "http://192.168.191.1:8080/DrivingSchoolServer/GetAllStudyInfoServlet";
 
+    public final static String CHECK_FEED = "http://192.168.191.1:8080/DrivingSchoolServer/CheckFeedServlet";
+
+    public final static String CHECK_FEED_TIME = "http://192.168.191.1:8080/DrivingSchoolServer/CheckTimeFeedServlet";
+
+    public final static String SEND_FEED = "http://192.168.191.1:8080/DrivingSchoolServer/SendFeedServlet";
+
+    public final static String GET_MY_EXAM = "http://192.168.191.1:8080/DrivingSchoolServer/GetMyExamServlet";
+
+    public final static String CHECK_EXAM_FEED = "http://192.168.191.1:8080/DrivingSchoolServer/CheckExamFeedServlet";
+
+    public final static String GET_MY_FEED = "http://192.168.191.1:8080/DrivingSchoolServer/GetAllFeedServlet";
+
     public final static String EMAIL_SUBJECT = "驾校易管理邮箱码";
 
     public final static String EMAIL_CODE_TIME = "emailcodetime";

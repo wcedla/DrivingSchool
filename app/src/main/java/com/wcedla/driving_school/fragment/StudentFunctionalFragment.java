@@ -49,6 +49,7 @@ public class StudentFunctionalFragment extends Fragment {
         functionItemBeanList.add(new FunctionItemBean(R.drawable.my_coach, "我的教练"));
         functionItemBeanList.add(new FunctionItemBean(R.drawable.my_study, "我的学习"));
         functionItemBeanList.add(new FunctionItemBean(R.drawable.my_exam, "我的考试"));
+        functionItemBeanList.add(new FunctionItemBean(R.drawable.functional_feed, "我的报错"));
         StudentGridAdapter studentGridAdapter = new StudentGridAdapter(myActivity, functionItemBeanList);
         splitLineGridview.setAdapter(studentGridAdapter);
         return view;

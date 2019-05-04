@@ -199,6 +199,23 @@ public class JsonUtils {
         }
     }
 
+    public static int getFeedCheck(String responseString) {
+        String result = "";
+        try {
+            JSONObject jsonObject = new JSONObject(responseString);
+            result = jsonObject.getString("status");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if ("done".equals(result)) {
+            return -1;
+        } else if ("none".equals(result)) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
 
 }
 
