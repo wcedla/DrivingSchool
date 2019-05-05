@@ -175,6 +175,14 @@ public class Config {
 
     public final static String GET_MY_FEED = "http://192.168.191.1:8080/DrivingSchoolServer/GetAllFeedServlet";
 
+    public final static String GET_ALL_USER_INFO = "http://192.168.191.1:8080/DrivingSchoolServer/GetAllUserInfoServlet";
+
+    public final static String DELETE_USER_INFO = "http://192.168.191.1:8080/DrivingSchoolServer/DeleteUserServlet";
+
+    public final static String GET_ALL_FEED_INFO = "http://192.168.191.1:8080/DrivingSchoolServer/GetAllUserFeedServlet";
+
+    public final static String SET_FEED_STATUS = "http://192.168.191.1:8080/DrivingSchoolServer/SetFeedStudyServlet";
+
     public final static String EMAIL_SUBJECT = "驾校易管理邮箱码";
 
     public final static String EMAIL_CODE_TIME = "emailcodetime";

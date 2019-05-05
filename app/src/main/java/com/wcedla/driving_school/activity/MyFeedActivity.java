@@ -130,8 +130,18 @@ public class MyFeedActivity extends AppCompatActivity {
         if (myFeedDataBean != null && myFeedDataBean.getMyFeedInfo() != null) {
             List<MyFeedDataBean.MyFeedInfoBean> myFeedInfoBeanList = new ArrayList<>();
             for (MyFeedDataBean.MyFeedInfoBean myFeedInfoBean : myFeedDataBean.getMyFeedInfo()) {
-                if (StudyUtils.getStudyProgress(myFeedInfoBean.getProgress()).contains(name) || StudyUtils.getStudyProgress(myFeedInfoBean.getMessage()).contains(name) || ExamUtils.getExamProgress(myFeedInfoBean.getProgress()).contains(name)) {
-                    myFeedInfoBeanList.add(myFeedInfoBean);
+                if (myFeedInfoBean.getType().equals("1")) {
+                    if (StudyUtils.getStudyProgress(myFeedInfoBean.getProgress()).contains(name)) {
+                        myFeedInfoBeanList.add(myFeedInfoBean);
+                    }
+                } else if (myFeedInfoBean.getType().equals("2")) {
+                    if (StudyUtils.getStudyProgress(myFeedInfoBean.getProgress()).contains(name)) {
+                        myFeedInfoBeanList.add(myFeedInfoBean);
+                    }
+                } else if (myFeedInfoBean.getType().equals("3")) {
+                    if (ExamUtils.getExamProgress(myFeedInfoBean.getProgress()).contains(name)) {
+                        myFeedInfoBeanList.add(myFeedInfoBean);
+                    }
                 }
             }
             searchResultBean.setMyFeedInfo(myFeedInfoBeanList);

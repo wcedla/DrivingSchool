@@ -2,15 +2,15 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/auth_check_root"
+    android:id="@+id/user_info_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#4CAF50"
     android:fitsSystemWindows="true"
-    tools:context=".activity.ShowAuthInfoActivity">
+    tools:context=".activity.ShowUserInfoActivity">
 
     <RelativeLayout
-        android:id="@+id/auth_check_head_root"
+        android:id="@+id/user_info_head_root"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/auth_check_back"
+            android:id="@+id/user_info_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
@@ -27,14 +27,14 @@
             android:src="@drawable/back" />
 
         <TextView
-            android:id="@+id/auth_check_head_text"
+            android:id="@+id/user_info_head_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="#4CAF50"
             android:gravity="center"
             android:padding="15dp"
-            android:text="用户审核"
+            android:text="用户查看"
             android:textAlignment="center"
             android:textColor="#FFF"
             android:textSize="16sp" />
@@ -42,17 +42,17 @@
     </RelativeLayout>
 
     <RadioGroup
-        android:id="@+id/auth_check_radio_group"
+        android:id="@+id/user_info_radio_group"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#fafafa"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_check_head_root">
+        app:layout_constraintTop_toBottomOf="@id/user_info_head_root">
 
         <RadioButton
-            android:id="@+id/auth_check_all"
+            android:id="@+id/user_info_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -62,46 +62,37 @@
             android:textSize="14sp" />
 
         <RadioButton
-            android:id="@+id/auth_check_doing"
+            android:id="@+id/user_info_coach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="审核中"
+            android:text="教练"
             android:textColor="#000"
             android:textSize="14sp" />
 
         <RadioButton
-            android:id="@+id/auth_check_failed"
+            android:id="@+id/user_info_student"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="审核未通过"
-            android:textColor="#000"
-            android:textSize="14sp" />
-
-        <RadioButton
-            android:id="@+id/auth_check_success"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="审核通过"
+            android:text="学员"
             android:textColor="#000"
             android:textSize="14sp" />
 
     </RadioGroup>
 
     <LinearLayout
-        android:id="@+id/auth_check_search_root"
+        android:id="@+id/user_info_search_root"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#fafafa"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_check_radio_group">
+        app:layout_constraintTop_toBottomOf="@id/user_info_radio_group">
 
         <EditText
-            android:id="@+id/auth_check_search"
+            android:id="@+id/user_info_search_input"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -112,7 +103,7 @@
             android:drawablePadding="10dp"
             android:focusable="false"
             android:gravity="start|center_vertical"
-            android:hint="输入需要查找的用户"
+            android:hint="输入需要查找的用户姓名或编号"
             android:maxLines="1"
             android:padding="10dp"
             android:textColor="#000000"
@@ -120,7 +111,7 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/auth_check_search_btn"
+            android:id="@+id/user_info_search_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -129,22 +120,23 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/auth_check_split_line"
+        android:id="@+id/user_info_split_line"
         android:layout_width="0dp"
         android:layout_height="1sp"
         android:background="#b9b9b9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_check_search_root" />
+        app:layout_constraintTop_toBottomOf="@id/user_info_search_root" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/auth_check_recycler_view"
+        android:id="@+id/user_info_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#fafafa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_check_split_line" />
+        app:layout_constraintTop_toBottomOf="@id/user_info_split_line" />
+
 
 </android.support.constraint.ConstraintLayout>

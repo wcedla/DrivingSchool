@@ -60,9 +60,9 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyFeedHold
             myFeedHolder.name.setText(myFeedDataBean.getMyFeedInfo().get(i).getRealName());
             myFeedHolder.no.setText(myFeedDataBean.getMyFeedInfo().get(i).getStudentNo());
             myFeedHolder.type.setText("进度错误");
-            myFeedHolder.progress.setText(StudyUtils.getStudyProgress(myFeedDataBean.getMyFeedInfo().get(i).getMessage()));
-            myFeedHolder.time.setVisibility(View.GONE);
-            myFeedHolder.timeHead.setVisibility(View.GONE);
+            myFeedHolder.progress.setText(StudyUtils.getStudyProgress(myFeedDataBean.getMyFeedInfo().get(i).getProgress()));
+//            myFeedHolder.time.setVisibility(View.GONE);
+//            myFeedHolder.timeHead.setVisibility(View.GONE);
             myFeedHolder.time.setText(myFeedDataBean.getMyFeedInfo().get(i).getMessage() + "小时");
             myFeedHolder.status.setText(myFeedDataBean.getMyFeedInfo().get(i).getStatus());
         } else if (myFeedDataBean.getMyFeedInfo().get(i).getType().equals("3")) {
@@ -108,7 +108,6 @@ public class MyFeedAdapter extends RecyclerView.Adapter<MyFeedAdapter.MyFeedHold
             time = itemView.findViewById(R.id.my_feed_time_text);
             timeHead = itemView.findViewById(R.id.my_feed_time_head);
             status = itemView.findViewById(R.id.my_feed_status_text);
-            ;
         }
     }
 }

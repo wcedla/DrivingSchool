@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="2dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/all_user_info_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="#FF5722"
+                android:gravity="start"
+                android:padding="15dp"
+                android:text="温龙安"
+                android:textAlignment="viewStart"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/all_user_info_no_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_user_info_name"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="教练号:" />
+
+            <TextView
+                android:id="@+id/all_user_info_no_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="2019001016"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/all_user_info_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_user_info_name" />
+
+
+            <TextView
+                android:id="@+id/all_user_info_time_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_user_info_no_text"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="驾龄:" />
+
+            <TextView
+                android:id="@+id/all_user_info_time_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="5年"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/all_user_info_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_user_info_no_text" />
+
+            <TextView
+                android:id="@+id/all_user_info_mobile_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_user_info_time_text"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:text="手机号:" />
+
+            <TextView
+                android:id="@+id/all_user_info_mobile_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="18350904693"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/all_user_info_barrier"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_user_info_time_text" />
+
+            <android.support.constraint.Barrier
+                android:id="@+id/all_user_info_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="right"
+                app:constraint_referenced_ids="all_user_info_no_head,all_user_info_time_head,all_user_info_mobile_head" />
+
+            <View
+                android:id="@+id/all_user_info_split_line"
+                android:layout_width="0dp"
+                android:layout_height="1sp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_user_info_mobile_text"
+                android:background="#b9b9b9" />
+
+            <Button
+                android:id="@+id/all_user_info_delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_user_info_split_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="#00000000"
+                android:text="删除"
+                android:textColor="#f00" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>

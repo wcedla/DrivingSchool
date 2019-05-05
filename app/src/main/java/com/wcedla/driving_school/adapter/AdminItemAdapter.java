@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.wcedla.driving_school.R;
 import com.wcedla.driving_school.activity.ShowAuthInfoActivity;
+import com.wcedla.driving_school.activity.ShowUserInfoActivity;
+import com.wcedla.driving_school.activity.UserFeedActivity;
 import com.wcedla.driving_school.bean.AdminItemAdapterBean;
 
 import java.util.List;
@@ -74,6 +76,14 @@ public class AdminItemAdapter extends BaseAdapter {
             case 0:
                 Intent authInfo=new Intent(context, ShowAuthInfoActivity.class);
                 context.startActivity(authInfo);
+                break;
+            case 1:
+                Intent userIntent = new Intent(context, ShowUserInfoActivity.class);
+                context.startActivity(userIntent);
+                break;
+            case 2:
+                Intent userFeedIntent = new Intent(context, UserFeedActivity.class);
+                context.startActivity(userFeedIntent);
                 break;
             default:
                 break;

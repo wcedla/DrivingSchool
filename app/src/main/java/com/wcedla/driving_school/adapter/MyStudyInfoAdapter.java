@@ -149,9 +149,9 @@ public class MyStudyInfoAdapter extends RecyclerView.Adapter<MyStudyInfoAdapter.
                     @Override
                     public void onClick(View v) {
                         feedType.setText("时长错误");
-                        timeHead.setVisibility(View.VISIBLE);
-                        timeInput.setVisibility(View.VISIBLE);
-                        timeUnit.setVisibility(View.VISIBLE);
+//                        timeHead.setVisibility(View.VISIBLE);
+//                        timeInput.setVisibility(View.VISIBLE);
+//                        timeUnit.setVisibility(View.VISIBLE);
                         timeInput.setText(time);
                         progressHead.setVisibility(View.GONE);
                         progressText.setVisibility(View.GONE);
@@ -173,9 +173,10 @@ public class MyStudyInfoAdapter extends RecyclerView.Adapter<MyStudyInfoAdapter.
                     public void onClick(View v) {
                         hideInputMethod(timeInput);
                         feedType.setText("进度错误");
-                        timeHead.setVisibility(View.GONE);
-                        timeInput.setVisibility(View.GONE);
-                        timeUnit.setVisibility(View.GONE);
+//                        timeHead.setVisibility(View.GONE);
+//                        timeInput.setVisibility(View.GONE);
+//                        timeUnit.setVisibility(View.GONE);
+                        timeInput.setText(time);
                         progressHead.setVisibility(View.VISIBLE);
                         progressText.setVisibility(View.VISIBLE);
                         if (feedStatus) {
@@ -229,7 +230,7 @@ public class MyStudyInfoAdapter extends RecyclerView.Adapter<MyStudyInfoAdapter.
                 if (feedType.getText().equals("时长错误")) {
                     sendFeed("1", (StudyUtils.getStudyProgressLevel(progress) + 1) + "", timeInput.getText().toString().trim());
                 } else {
-                    sendFeed("2", "-1", (StudyUtils.getStudyProgressLevel(progressText.getText().toString()) + 1) + "");
+                    sendFeed("2", (StudyUtils.getStudyProgressLevel(progressText.getText().toString()) + 1) + "", timeInput.getText().toString().trim());
                 }
             }
         });

@@ -7,7 +7,7 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/my_feed_root"
+        android:id="@+id/all_feed_root"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -27,10 +27,10 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/my_feed_name"
+                android:id="@+id/all_feed_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#3F51B5"
+                android:background="#FF5722"
                 android:gravity="start"
                 android:padding="15dp"
                 android:text="温龙安"
@@ -41,121 +41,151 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/my_feed_no_head"
+                android:id="@+id/all_feed_no_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="学员号:"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/my_feed_name" />
+                app:layout_constraintTop_toBottomOf="@id/all_feed_name" />
 
             <TextView
-                android:id="@+id/my_feed_no_text"
+                android:id="@+id/all_feed_no_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="2019001016"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/my_feed_barrier"
-                app:layout_constraintTop_toBottomOf="@id/my_feed_name" />
+                app:layout_constraintStart_toEndOf="@id/all_feed_barrier"
+                app:layout_constraintTop_toBottomOf="@id/all_feed_name" />
 
 
             <TextView
-                android:id="@+id/my_feed_type_head"
+                android:id="@+id/all_feed_type_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="报错类型:"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/my_feed_no_head" />
+                app:layout_constraintTop_toBottomOf="@id/all_feed_no_head" />
 
             <TextView
-                android:id="@+id/my_feed_type_text"
+                android:id="@+id/all_feed_type_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="学习时长"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/my_feed_barrier"
-                app:layout_constraintTop_toBottomOf="@id/my_feed_no_head" />
+                app:layout_constraintStart_toEndOf="@id/all_feed_barrier"
+                app:layout_constraintTop_toBottomOf="@id/all_feed_no_head" />
 
             <TextView
-                android:id="@+id/my_feed_progress_head"
+                android:id="@+id/all_feed_progress_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="报错进度:"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/my_feed_type_head" />
+                app:layout_constraintTop_toBottomOf="@id/all_feed_type_head" />
 
             <TextView
-                android:id="@+id/my_feed_progress_text"
+                android:id="@+id/all_feed_progress_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="倒车入库"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/my_feed_barrier"
-                app:layout_constraintTop_toBottomOf="@id/my_feed_type_head" />
+                app:layout_constraintStart_toEndOf="@id/all_feed_barrier"
+                app:layout_constraintTop_toBottomOf="@id/all_feed_type_head" />
 
             <TextView
-                android:id="@+id/my_feed_time_head"
+                android:id="@+id/all_feed_time_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="报错时间:"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/my_feed_progress_head" />
+                app:layout_constraintTop_toBottomOf="@id/all_feed_progress_head" />
 
             <TextView
-                android:id="@+id/my_feed_time_text"
+                android:id="@+id/all_feed_time_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:text="5小时"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/my_feed_barrier"
-                app:layout_constraintTop_toBottomOf="@id/my_feed_progress_head" />
+                app:layout_constraintStart_toEndOf="@id/all_feed_barrier"
+                app:layout_constraintTop_toBottomOf="@id/all_feed_progress_head" />
 
             <TextView
-                android:id="@+id/my_feed_status_head"
+                android:id="@+id/all_feed_status_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:text="审核状态:"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/my_feed_time_head" />
+                app:layout_constraintTop_toBottomOf="@id/all_feed_time_head" />
 
             <TextView
-                android:id="@+id/my_feed_status_text"
+                android:id="@+id/all_feed_status_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
                 android:text="审核中"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/my_feed_barrier"
-                app:layout_constraintTop_toBottomOf="@id/my_feed_time_head"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/all_feed_barrier"
+                app:layout_constraintTop_toBottomOf="@id/all_feed_time_head" />
 
             <android.support.constraint.Barrier
-                android:id="@+id/my_feed_barrier"
+                android:id="@+id/all_feed_barrier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="right"
-                app:constraint_referenced_ids="my_feed_no_head,my_feed_type_head,my_feed_progress_head,my_feed_time_head,my_feed_status_head" />
+                app:constraint_referenced_ids="all_feed_no_head,all_feed_type_head,all_feed_progress_head,all_feed_time_head,all_feed_status_head" />
+
+            <View
+                android:id="@+id/all_feed_split_line"
+                android:layout_width="0dp"
+                android:layout_height="1sp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_feed_status_head"
+                android:background="#b9b9b9" />
+
+            <Button
+                android:id="@+id/all_feed_ok"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/all_feed_failed"
+                app:layout_constraintTop_toBottomOf="@id/all_feed_split_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="#00000000"
+                android:text="通过审核"
+                android:textColor="#f00" />
+
+            <Button
+                android:id="@+id/all_feed_failed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/all_feed_ok"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_feed_split_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="#00000000"
+                android:text="审核不通过"
+                android:textColor="#f00" />
 
 
         </android.support.constraint.ConstraintLayout>

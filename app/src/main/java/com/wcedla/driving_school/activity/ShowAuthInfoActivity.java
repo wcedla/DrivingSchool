@@ -15,7 +15,6 @@ import android.text.Spanned;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -28,7 +27,6 @@ import com.wcedla.driving_school.R;
 import com.wcedla.driving_school.adapter.AuthInfoShowAdapter;
 import com.wcedla.driving_school.bean.AuthInfoBean;
 import com.wcedla.driving_school.customview.CustomProgressDialog;
-import com.wcedla.driving_school.listener.MQTTMessageCallback;
 import com.wcedla.driving_school.service.MQTTService;
 import com.wcedla.driving_school.tool.HttpUtils;
 import com.wcedla.driving_school.tool.ToolUtils;
@@ -40,7 +38,6 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -96,6 +93,11 @@ public class ShowAuthInfoActivity extends AppCompatActivity {
         mqttServiceConnection = new MQTTServiceConnection();
         Intent MQTTServiceIntent = new Intent(ShowAuthInfoActivity.this, MQTTService.class);
         bindService(MQTTServiceIntent, mqttServiceConnection, BIND_AUTO_CREATE);
+    }
+
+    @OnClick(R.id.auth_check_back)
+    public void backClick() {
+        finish();
     }
 
     @OnClick(R.id.auth_check_search)

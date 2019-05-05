@@ -45,6 +45,8 @@ public class AdminMainActivity extends AppCompatActivity {
         itemAdapterBeanList.add(authCheck);
         AdminItemAdapterBean userSearch=new AdminItemAdapterBean(R.drawable.user_search,"用户查找");
         itemAdapterBeanList.add(userSearch);
+        AdminItemAdapterBean feedCheck = new AdminItemAdapterBean(R.drawable.admin_feed, "用户反馈");
+        itemAdapterBeanList.add(feedCheck);
 
     }
 }

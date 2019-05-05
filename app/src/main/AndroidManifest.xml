@@ -19,7 +19,9 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MyFeedActivity"></activity>
+        <activity android:name=".activity.UserFeedActivity"></activity>
+        <activity android:name=".activity.ShowUserInfoActivity" />
+        <activity android:name=".activity.MyFeedActivity" />
         <activity android:name=".activity.MyExamActivity" />
         <activity android:name=".activity.StudyInfoDetialActivity" />
         <activity android:name=".activity.MyStudyActivity" />
