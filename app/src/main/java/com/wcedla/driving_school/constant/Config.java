@@ -183,6 +183,8 @@ public class Config {
 
     public final static String SET_FEED_STATUS = "http://192.168.191.1:8080/DrivingSchoolServer/SetFeedStudyServlet";
 
+    public final static String ADD_USER_INFO = "http://192.168.191.1:8080/DrivingSchoolServer/AddUserServlet";
+
     public final static String EMAIL_SUBJECT = "驾校易管理邮箱码";
 
     public final static String EMAIL_CODE_TIME = "emailcodetime";

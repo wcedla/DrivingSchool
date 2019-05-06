@@ -9,7 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.orhanobut.hawk.Hawk;
 import com.wcedla.driving_school.R;
+import com.wcedla.driving_school.activity.AddUserActivity;
+import com.wcedla.driving_school.activity.AdminMainActivity;
+import com.wcedla.driving_school.activity.LoginActivity;
 import com.wcedla.driving_school.activity.ShowAuthInfoActivity;
 import com.wcedla.driving_school.activity.ShowUserInfoActivity;
 import com.wcedla.driving_school.activity.UserFeedActivity;
@@ -84,6 +88,20 @@ public class AdminItemAdapter extends BaseAdapter {
             case 2:
                 Intent userFeedIntent = new Intent(context, UserFeedActivity.class);
                 context.startActivity(userFeedIntent);
+                break;
+            case 3:
+                Intent addUserIntent = new Intent(context, AddUserActivity.class);
+                context.startActivity(addUserIntent);
+                break;
+            case 4:
+                Hawk.delete("loginType");
+                Hawk.delete("newHead");
+                Hawk.delete("loginNo");
+                Hawk.delete("loginUser");
+                Intent loginIntent = new Intent(context, LoginActivity.class);
+                loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                ((AdminMainActivity) context).finish();
+                context.startActivity(loginIntent);
                 break;
             default:
                 break;

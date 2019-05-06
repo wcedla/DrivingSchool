@@ -288,7 +288,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="right"
-        app:constraint_referenced_ids="register_type_head,register_account_head,register_password_head,register_email_head,register_yzm_head" />
+        app:constraint_referenced_ids="register_account_head,register_password_head,register_email_head,register_yzm_head" />
 
     <Button
         android:id="@+id/register_btn"
